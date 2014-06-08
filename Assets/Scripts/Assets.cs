@@ -17,7 +17,7 @@ public class Assets : MonoBehaviour {
     void Awake (){
 		
             //Loading the items into the array
-           audioFiles[0] = (AudioClip)Resources.Load("Resources/Sound/intro");
+           //audioFiles[0] = (AudioClip)Resources.Load("Resources/Sound/intro"); //example to source asset
 		}
 	
 	// Use this for initialization
