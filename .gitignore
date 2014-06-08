@@ -3,3 +3,13 @@ Temp/
 Assets/Resources/
 *.dll
 *.db
+
+Assembly-UnityScript.unityproj
+
+Assembly-UnityScript-vs.unityproj
+
+Assembly-UnityScript-vs.unityproj
+
+Assembly-CSharp.csproj
+
+Assembly-CSharp-vs.csproj
