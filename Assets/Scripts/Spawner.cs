@@ -11,6 +11,7 @@ using System.Collections;
 
 public class Spawner : MonoBehaviour {
 	
+	bool enableSpawning;
 	public enum Spawn {Enemy, PlayerShip, Powerup};
 	public Spawn spawnSelection;
 	
@@ -43,27 +44,29 @@ public class Spawner : MonoBehaviour {
 	
 	//supposed to spew enemies from the array
 	public void enemy(){
-		print("Enemy spawn initialized");
-		Vector3 enemypos = new Vector3(transform.position.x, transform.position.y - 5, transform.position.z);
-		GameObject enemy0 = Instantiate(enemiesGO[0], enemypos, transform.rotation) as GameObject;
-		enemy0.transform.parent = transform;
+		
+		spawn(2, enemiesGO[0],"Enemy spawn initialized");
 	}
 	
 	
 	//supposed to spew ship player from the array
 	public void ship(){
-		print("Player spawn initialized");
-		Vector3 playerpos = new Vector3(transform.position.x, transform.position.y - 5, transform.position.z);
-		GameObject player0 = Instantiate(playerShipGO, playerpos, transform.rotation) as GameObject;
-		player0.transform.parent = transform;
+		
+		spawn(5, playerShipGO,"Player spawn initialized");
 	}
 	
 	//supposed to spew the powerups from the array
 	public void powerup(){
-		print("Power Up spawn initialized");
-		Vector3 powerupPos = new Vector3(transform.position.x, transform.position.y - 5, transform.position.z);
-		GameObject powerup0 = Instantiate(powerupGO[0], powerupPos, transform.rotation) as GameObject;
-		powerup0.transform.parent = transform;
+		
+		spawn(5, powerupGO[0],"Power Up spawn initialized");
+	}
+	
+	//global spawn script
+	public void spawn(float spawnOffset, GameObject spawnGO, string spawnMessage){
+		print(spawnMessage);
+		Vector3 spawnPos = new Vector3(transform.position.x, transform.position.y - spawnOffset, transform.position.z);
+		GameObject spawn0 = Instantiate(spawnGO, spawnPos, transform.rotation) as GameObject;
+		spawn0.transform.parent = transform;
 	}
 	
 	//Diplays the Spawner
