@@ -12,7 +12,7 @@ using System.Collections;
 public class Spawner : MonoBehaviour {
 	
 	bool enableSpawning;
-	public enum Spawn {Enemy, PlayerShip, Powerup};
+	public enum Spawn {Enemy, PlayerShip, Powerup, Nothing};
 	public Spawn spawnSelection;
 	
 	public GameObject[] enemiesGO;
