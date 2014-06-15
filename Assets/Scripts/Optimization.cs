@@ -5,17 +5,11 @@ using System.Collections;
 /// Optimization.cs
 /// 
 /// This script was designed for loading and unloading assets, managing triggers, and visibilitys
-/// A great place to put all the debug info data such as fps, particle count, etc.
 /// 
 /// </summary>
 
 public class Optimization : MonoBehaviour {
-	
-	public enum DebugGUI {FullDetail, FPS, ParticleCount, None};
-	public DebugGUI debugSelection;
-	
-	public float fps;
-	
+
 	// Use this for initialization
 	void Start () {
 	

@@ -1,11 +1,7 @@
 Library/
-
 Temp/
-
 Assets/Resources/
-
 *.dll
-
 *.db
 
 Assembly-UnityScript.unityproj
