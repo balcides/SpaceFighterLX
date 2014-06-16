@@ -18,7 +18,7 @@ public class Inputs : MonoBehaviour {
 	public enum inputType {ios, iCade, osx, pc, android, oculous};
 	public inputType controls;
 	
-	public Transform playerShip;
+	Transform playerShip;
 	Assets assets;
 	
 	public float inputMoveVertical;
