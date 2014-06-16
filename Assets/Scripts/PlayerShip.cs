@@ -8,6 +8,9 @@ using System.Collections;
 /// Lives, Assets, Shilds, and Controls for Player
 /// 
 /// </summary>
+/// 
+
+[RequireComponent (typeof (TextMesh))]
 
 public class PlayerShip : MonoBehaviour {
 	
@@ -19,6 +22,7 @@ public class PlayerShip : MonoBehaviour {
 	
 	public int playerLives;
 	public int shields;
+	public float playerSpeed;
 	
 	public float cameraSpeed;
 	public float cameraAngle;

@@ -16,10 +16,14 @@ using System.Collections;
 public class Inputs : MonoBehaviour {
 	
 	public enum inputType {ios, iCade, osx, pc, android, oculous};
-	public inputType controls = inputType.ios;
+	public inputType controls;
 	
 	public Transform playerShip;
 	Assets assets;
+	
+	public float inputMoveVertical;
+	public float inputMoveHorizontal;
+	private float PlayerSpeed;
 	
     inputType controlsUsed (inputType controls)
     {
@@ -36,20 +40,38 @@ public class Inputs : MonoBehaviour {
 	
 	void Awake(){
 		assets = GetComponent<Assets>();
-		playerShip = assets.models[0];
+		playerShip = assets.models[0];										//grabs the player ship model from the assets
+		PlayerSpeed = playerShip.GetComponent<PlayerShip>().playerSpeed;	//grabs player speed from the ship's script on startup
 	}
 	
 	// Use this for initialization
 	void Start () {
 		
-		//initialize controls
-		controlsUsed(controls);
-
-		
+		controlsUsed(controls);	//initialize controls
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		
+		runInputHandler();
+
+	}
 	
+	//Decides which input script to use set by the inputType enum
+	void runInputHandler(){
+		if(controls == inputType.osx){ osxInput(); }
+		else{}
+		
+		
+	}
+	
+	void osxInput(){
+		
+		PlayerSpeed = playerShip.GetComponent<PlayerShip>().playerSpeed; //Maybe expensive
+		
+		inputMoveVertical = Input.GetAxis("Vertical") * PlayerSpeed * Time.deltaTime;
+		inputMoveHorizontal = Input.GetAxis("Horizontal") * PlayerSpeed * Time.deltaTime;
+		
+		playerShip.Translate(inputMoveHorizontal, inputMoveVertical, 0);
 	}
 }
