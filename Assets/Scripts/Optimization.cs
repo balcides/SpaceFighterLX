@@ -9,6 +9,9 @@ using System;
 /// A great place to put all the debug info data such as fps, particle count, etc.
 /// 
 /// </summary>
+/// 
+
+[RequireComponent (typeof (TextMesh))]
 
 public class Optimization : MonoBehaviour {
 	
