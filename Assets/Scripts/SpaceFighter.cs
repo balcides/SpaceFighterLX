@@ -6,7 +6,7 @@ using System.Collections;
 /// SpaceFighter.cs
 /// 
 /// This script is deisgned to run the menus and start on startup
-/// This is meant to attach to a unity scene file named "runGame"
+/// This is meant to attach to a unity scene file named "MasterGameController"
 /// to start the game with and attach to a gameObject named "Global"
 ///
 /// </summary>
@@ -16,6 +16,7 @@ using System.Collections;
 [RequireComponent (typeof (Inputs))]				//require Input
 [RequireComponent (typeof (Screensize))]			//require Screensize
 [RequireComponent (typeof (Optimization))]			//require Optimization
+[RequireComponent (typeof (Assets))]				//require Assets
 
 
 public class SpaceFighter : MonoBehaviour {

@@ -11,11 +11,15 @@ using System.Collections;
 /// 
 /// </summary>
 
+[RequireComponent (typeof (Assets))]				//require Assets
 
 public class Inputs : MonoBehaviour {
 	
 	public enum inputType {ios, iCade, osx, pc, android, oculous};
 	public inputType controls = inputType.ios;
+	
+	public Transform playerShip;
+	Assets assets;
 	
     inputType controlsUsed (inputType controls)
     {
@@ -30,7 +34,11 @@ public class Inputs : MonoBehaviour {
         return controls;     
     }
 	
-
+	void Awake(){
+		assets = GetComponent<Assets>();
+		playerShip = assets.models[0];
+	}
+	
 	// Use this for initialization
 	void Start () {
 		

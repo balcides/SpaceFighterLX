@@ -20,7 +20,7 @@ using System.Collections;
 /// 
 /// </summary>
 
-[RequireComponent (typeof (GUIText))]	
+[RequireComponent (typeof (TextMesh))]	
 
 public class Debug_FPS : MonoBehaviour {
 	
@@ -32,20 +32,21 @@ public class Debug_FPS : MonoBehaviour {
 	
 	public double fcount;
 	
-	//var guiText : GUIText;   //in this case, guiText is known as the component attached to the gameObject this script is running on
+	TextMesh textMesh;   //in this case, guiText is known as the component attached to the gameObject this script is running on
 
 	// Use this for initialization
 	void Start () {
 		
-		//guiText = GetComponent(GUIText);
+		textMesh = GetComponent<TextMesh>();
 	
-	    if( !guiText )
-	    {
-	        print ("FramesPerSecond needs a GUIText component!");
-	        enabled = false;
-	        return;
-	    }
-		else{}
+//	    if( !TextMesh )
+//	    {
+//	        print ("FramesPerSecond needs a GUIText component!");
+//	        enabled = false;
+//	        return;
+//	    }
+//		else{}
+		
 	    timeleft = updateInterval; 
 	
 	}
@@ -63,7 +64,7 @@ public class Debug_FPS : MonoBehaviour {
 			fcount = (accum/frames);
 	        // display two fractional digits (f2 format)
 			
-			guiText.text = "fps:" + fcount.ToString("f2");
+			textMesh.text = "fps:" + fcount.ToString("f2");
 	        //guiText.text = "fps:" + (accum/frames).ToString("f2");
 	        timeleft = updateInterval;
 	        accum = 0.0;

@@ -5,7 +5,7 @@ using System;
 /// <summary>
 /// Optimization.cs
 /// 
-/// This script was designed for loading and unloading assets, managing triggers, and visibilitys
+/// This script was designed for loading and unloading assets, managing triggers, and visibility
 /// A great place to put all the debug info data such as fps, particle count, etc.
 /// 
 /// </summary>
@@ -14,7 +14,7 @@ public class Optimization : MonoBehaviour {
 	
 	public enum DebugGUI {FullDetail, FPS, ParticleCount, None};
 	public DebugGUI debugSelection;
-	public GUIText fpsText;
+	public TextMesh fpsText;
 	public float fps;
 	
 	Debug_FPS debugFps;
@@ -27,14 +27,14 @@ public class Optimization : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		
-		if(debugSelection == DebugGUI.FPS){ debugFps.enabled = true; fpsText.enabled = true; }
+		if(debugSelection == DebugGUI.FPS){ debugFps.enabled = true; fpsText.renderer.enabled = true; }
 		else if(debugSelection == DebugGUI.FullDetail) {
 				debugFps.enabled = true; 
-				fpsText.enabled = true;
+				fpsText.renderer.enabled = true;
 		}
 		else{ 
 				debugFps.enabled = false;
-				fpsText.enabled = false;
+				fpsText.renderer.enabled = false;
 		}
 	
 	}
