@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 /// <summary>
 /// Optimization.cs
@@ -13,17 +14,35 @@ public class Optimization : MonoBehaviour {
 	
 	public enum DebugGUI {FullDetail, FPS, ParticleCount, None};
 	public DebugGUI debugSelection;
-	
+	public GUIText fpsText;
 	public float fps;
+	
+	Debug_FPS debugFps;
+	
+	void Awake(){
+		debugFps = fpsText.GetComponent<Debug_FPS>();
+		fps = Convert.ToSingle(debugFps.fcount);
+	}
 	
 	// Use this for initialization
 	void Start () {
+		
+		if(debugSelection == DebugGUI.FPS){ debugFps.enabled = true; fpsText.enabled = true; }
+		else if(debugSelection == DebugGUI.FullDetail) {
+				debugFps.enabled = true; 
+				fpsText.enabled = true;
+		}
+		else{ 
+				debugFps.enabled = false;
+				fpsText.enabled = false;
+		}
 	
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+		
+		fps = Convert.ToSingle(debugFps.fcount);
 	}
 	
 	//to manage triggers in the game globallys

@@ -9,7 +9,7 @@ using System.Collections;
 /// 
 /// </summary>
 
-public class playerControls : MonoBehaviour {
+public class PlayerControls : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
