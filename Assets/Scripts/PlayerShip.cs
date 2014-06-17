@@ -23,17 +23,21 @@ public class PlayerShip : MonoBehaviour {
 	public int playerLives;
 	public int shields;
 	public float playerSpeed;
-	
+
 	public float cameraSpeed;
 	public float cameraAngle;
 	public bool cameraConstrains;
+	public bool invertY;
+	
+	private GameObject cam;
 	
 	public TextMesh livesText;
 	
+	Transform Asset; //Not sure but I kept this from my notes
 	
-	Transform Asset; //Not sure but I kept this for the graph notation
-	
-	
+	void Awake(){
+		cam = GameObject.FindWithTag("MainCamera");
+	}
 	
 	// Use this for initialization
 	void Start () {
@@ -42,7 +46,9 @@ public class PlayerShip : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		
 		livesText.text = "Lives " + playerLives.ToString("00");
+		runCameraMode();
 	}
 	
 	void playerControls(){
@@ -52,7 +58,23 @@ public class PlayerShip : MonoBehaviour {
 	void ctrlConstrains(){
 		//This section is for ship contrains
 		//this section is for camera constrains
+			//look at the position of minx, miny, maxx, and maxy of the camera
+		
+			        //Vector3 viewPos = camera.WorldToViewportPoint(target.position);
+			       // if (viewPos.x > 0.5F)
+			            //print("target is on the right side!");
+			        //else
+			           // print("target is on the left side!");
+			//if the ship is past each one, keep the ship in place
 	}
 	
+	//run changes needed to execute camera modes
+	void runCameraMode(){
+		if(modes == CtrlModes.mode1Starfox){
+			//take cam rotation and ship rotation and set it
+			cam.transform.eulerAngles = new Vector3(0,0,0);
+		}
+		else{}
+	}
 	
 }

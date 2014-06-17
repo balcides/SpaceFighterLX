@@ -19,6 +19,7 @@ public class Inputs : MonoBehaviour {
 	public inputType controls;
 	
 	Transform playerShip;
+	PlayerShip playerScript;
 	Assets assets;
 	
 	public float inputMoveVertical;
@@ -41,7 +42,9 @@ public class Inputs : MonoBehaviour {
 	void Awake(){
 		assets = GetComponent<Assets>();
 		playerShip = assets.playerShipGO.transform;										//grabs the player ship model from the assets
-		PlayerSpeed = playerShip.GetComponent<PlayerShip>().playerSpeed;	//grabs player speed from the ship's script on startup
+		playerScript = playerShip.GetComponent<PlayerShip>();
+		PlayerSpeed = playerScript.playerSpeed;	//grabs player speed from the ship's script on startup
+		
 	}
 	
 	// Use this for initialization
@@ -67,11 +70,16 @@ public class Inputs : MonoBehaviour {
 	
 	void osxInput(){
 		
-		PlayerSpeed = playerShip.GetComponent<PlayerShip>().playerSpeed; //Maybe expensive
+		PlayerSpeed = playerScript.playerSpeed; //Maybe expensive
 		
 		inputMoveVertical = Input.GetAxis("Vertical") * PlayerSpeed * Time.deltaTime;
 		inputMoveHorizontal = Input.GetAxis("Horizontal") * PlayerSpeed * Time.deltaTime;
 		
-		playerShip.Translate(inputMoveHorizontal, inputMoveVertical, 0);
+		if(playerScript.modes == PlayerShip.CtrlModes.mode1Starfox){ 
+			if(playerScript.invertY){playerShip.Translate(inputMoveHorizontal, 0, -inputMoveVertical); }
+			else{ playerShip.Translate(inputMoveHorizontal, 0, inputMoveVertical); }
+		}
+		else{}
+		
 	}
 }
