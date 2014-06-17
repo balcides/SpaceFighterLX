@@ -40,7 +40,7 @@ public class Inputs : MonoBehaviour {
 	
 	void Awake(){
 		assets = GetComponent<Assets>();
-		playerShip = assets.models[0];										//grabs the player ship model from the assets
+		playerShip = assets.playerShipGO.transform;										//grabs the player ship model from the assets
 		PlayerSpeed = playerShip.GetComponent<PlayerShip>().playerSpeed;	//grabs player speed from the ship's script on startup
 	}
 	

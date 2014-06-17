@@ -15,12 +15,14 @@ public class Spawner : MonoBehaviour {
 	public enum Spawn {Enemy, PlayerShip, Powerup, Nothing};
 	public Spawn spawnSelection;
 	
-	public GameObject[] enemiesGO;
-	public GameObject[] powerupGO;
-	public GameObject playerShipGO;
+	//public GameObject[] enemiesGO;
+	//public GameObject[] powerupGO;
+	//public GameObject playerShipGO;
 	
 	public Color gizmoColor;
 	public float gizmoScale;
+	
+	private Assets assets;
 	
 	Spawn spawnType (Spawn spawning)
     {
@@ -31,7 +33,12 @@ public class Spawner : MonoBehaviour {
 		
         return spawning;     
     }
-
+	
+	//connect components on start
+	void Awake(){
+		assets = transform.parent.GetComponent<Assets>();
+	}
+	
 	// Use this for initialization
 	void Start () {
 		spawnType(spawnSelection);	//initialize controls
@@ -45,20 +52,20 @@ public class Spawner : MonoBehaviour {
 	//supposed to spew enemies from the array
 	public void enemy(){
 		
-		spawn(2, enemiesGO[0],"Enemy spawn initialized");
+		spawn(2, assets.enemiesGO[0],"Enemy spawn initialized");
 	}
 	
 	
 	//supposed to spew ship player from the array
 	public void ship(){
 		
-		spawn(5, playerShipGO,"Player spawn initialized");
+		spawn(5, assets.playerShipGO,"Player spawn initialized");
 	}
 	
 	//supposed to spew the powerups from the array
 	public void powerup(){
 		
-		spawn(5, powerupGO[0],"Power Up spawn initialized");
+		spawn(5, assets.powerupGO[0],"Power Up spawn initialized");
 	}
 	
 	//global spawn script

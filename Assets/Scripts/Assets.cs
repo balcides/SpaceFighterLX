@@ -9,6 +9,9 @@ using System.Collections;
 
 public class Assets : MonoBehaviour {
 	
+	public GameObject[] enemiesGO;
+	public GameObject[] powerupGO;
+	public GameObject playerShipGO;
 	public Transform[] models;
 	public AudioClip[] audioFiles;
 	public Texture[] textures;
