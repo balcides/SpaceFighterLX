@@ -65,8 +65,11 @@ public class Game : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
-		livesText.text = "Lives " + playerShip.playerLives.ToString("00");
+		
+		if(isGameMenu){}
+		else{
+			livesText.text = "Lives " + playerShip.playerLives.ToString("00");
+		}
 	}
 	
 
