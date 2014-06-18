@@ -31,8 +31,6 @@ public class PlayerShip : MonoBehaviour {
 	
 	private GameObject cam;
 	
-	public TextMesh livesText;
-	
 	Transform Asset; //Not sure but I kept this from my notes
 	
 	void Awake(){
@@ -47,7 +45,7 @@ public class PlayerShip : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
-		livesText.text = "Lives " + playerLives.ToString("00");
+		
 		runCameraMode();
 	}
 	

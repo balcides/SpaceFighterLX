@@ -22,9 +22,13 @@ public class Game : MonoBehaviour {
 	private WeaponSystem weaponSystem;
 	private Menu menu;
 	private Assets assets;
+	private PlayerShip playerShip;
 	
 	public Transform spawnerGO;
 	public bool isGameMenu;
+	
+	public TextMesh livesText;
+	public TextMesh scoreText;
 	
 	//requires components if the game is not a menu
 	private void initilizeGame(){
@@ -36,7 +40,7 @@ public class Game : MonoBehaviour {
 			spawner = GetComponent<Spawner>();
 			weaponSystem = GetComponent<WeaponSystem>();
 			assets = GetComponent<Assets>();
-			
+			playerShip = GameObject.FindWithTag("Player").GetComponent<PlayerShip>();
 			
 			//require a gameobject called "spawner"
 			GameObject findSpawnerGO = GameObject.Find("SpawnerGO");
@@ -62,6 +66,7 @@ public class Game : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
+		livesText.text = "Lives " + playerShip.playerLives.ToString("00");
 	}
 	
 
