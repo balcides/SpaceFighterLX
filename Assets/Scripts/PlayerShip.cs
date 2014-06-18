@@ -29,7 +29,12 @@ public class PlayerShip : MonoBehaviour {
 	public bool cameraConstrains;
 	public bool invertY;
 	
+	public float povOffsetX;
+	public float povOffsetY;
+	public float povOffsetZ;
+	
 	private GameObject cam;
+	private Vector3 camPos;
 	
 	Transform Asset; //Not sure but I kept this from my notes
 	
@@ -68,9 +73,30 @@ public class PlayerShip : MonoBehaviour {
 	
 	//run changes needed to execute camera modes
 	void runCameraMode(){
+		
+		camPos = cam.transform.position;
+		
 		if(modes == CtrlModes.mode1Starfox){
+			
 			//take cam rotation and ship rotation and set it
 			cam.transform.eulerAngles = new Vector3(0,0,0);
+			
+			//move the ship to xyz offset from camera
+			povOffsetZ = 4.5f;
+			transform.position = new Vector3(transform.position.x, transform.position.y, camPos.z + povOffsetZ);
+	
+		}
+		else if(modes == CtrlModes.mode2POV){
+			
+			//move the ship to xyz offset from camera
+			povOffsetX = 0.03f;
+			povOffsetY = -0.69f;
+			povOffsetZ = 0;
+			
+			transform.position = new Vector3(camPos.x + povOffsetX, camPos.y + povOffsetY, camPos.z + povOffsetZ);
+			//cam.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+			
+			
 		}
 		else{}
 	}
