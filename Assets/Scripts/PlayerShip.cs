@@ -14,21 +14,27 @@ using System.Collections;
 
 public class PlayerShip : MonoBehaviour {
 	
+	//Control
 	public enum CtrlMovement {up, down, left, right, center};
 	public enum CtrlModes {mode1Starfox, mode2POV, mode3SideScroller, mode4Isometric};
 	
 	public CtrlMovement movement;
 	public CtrlModes modes;
 	
+	//Player
 	public int playerLives;
 	public int shields;
 	public float playerSpeed;
 
+	//Camera
 	public float cameraSpeed;
 	public float cameraAngle;
 	public bool cameraConstrains;
 	public bool invertY;
+	private GameObject cam;
+	private Vector3 camPos;
 	
+	//Position
 	public float povOffsetX;
 	public float povOffsetY;
 	public float povOffsetZ;
@@ -37,9 +43,7 @@ public class PlayerShip : MonoBehaviour {
 	public float povRotateOffsetY;
 	public float povRotateOffsetZ;
 	
-	private GameObject cam;
-	private Vector3 camPos;
-	
+
 	Transform Asset; //Not sure but I kept this from my notes
 	
 	void Awake(){
