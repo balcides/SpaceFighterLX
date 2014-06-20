@@ -33,6 +33,10 @@ public class PlayerShip : MonoBehaviour {
 	public float povOffsetY;
 	public float povOffsetZ;
 	
+	public float povRotateOffsetX;
+	public float povRotateOffsetY;
+	public float povRotateOffsetZ;
+	
 	private GameObject cam;
 	private Vector3 camPos;
 	
@@ -97,6 +101,11 @@ public class PlayerShip : MonoBehaviour {
 			//cam.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 			
 			
+		}
+		else if(modes == CtrlModes.mode3SideScroller){
+			
+				transform.position = new Vector3(camPos.x + povOffsetX, camPos.y + povOffsetY, camPos.z + povOffsetZ);
+				//transform.rotation = 
 		}
 		else{}
 	}
