@@ -23,6 +23,7 @@ public class Game : MonoBehaviour {
 	private Menu menu;
 	private Assets assets;
 	private PlayerShip playerShip;
+	private GameObject playerAsset;
 	
 	public Transform spawnerGO;
 	public bool isGameMenu;
@@ -40,7 +41,8 @@ public class Game : MonoBehaviour {
 			spawner = GetComponent<Spawner>();
 			weaponSystem = GetComponent<WeaponSystem>();
 			assets = GetComponent<Assets>();
-			playerShip = GameObject.FindWithTag("Player").GetComponent<PlayerShip>();
+			
+
 			
 			//require a gameobject called "spawner"
 			GameObject findSpawnerGO = GameObject.Find("SpawnerGO");
@@ -67,12 +69,21 @@ public class Game : MonoBehaviour {
 	void Update () {
 		
 		if(isGameMenu){}
-		else{
-			livesText.text = "Lives " + playerShip.playerLives.ToString("00");
-		}
+		else{ updatePlayerLives(); }
+
 	}
 	
-
+	//updates player lives on update if the tag is found
+	void updatePlayerLives()
+	{
+		playerAsset = GameObject.FindWithTag("Player");
+		
+		
+		if(!playerAsset){ playerShip = null;}
+		else{ 
+			playerShip = playerAsset.GetComponent<PlayerShip>();	
+			livesText.text = "Lives " + playerShip.playerLives.ToString("00"); }
+	}
 	
 
 }
