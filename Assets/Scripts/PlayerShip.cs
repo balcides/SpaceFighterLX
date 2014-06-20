@@ -98,14 +98,47 @@ public class PlayerShip : MonoBehaviour {
 			povOffsetZ = 0;
 			
 			transform.position = new Vector3(camPos.x + povOffsetX, camPos.y + povOffsetY, camPos.z + povOffsetZ);
-			//cam.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-			
 			
 		}
 		else if(modes == CtrlModes.mode3SideScroller){
 			
+			        //move the ship to xyz offset from camera
+				povOffsetX = 0.03f;
+				povOffsetY = -0.69f;
+				povOffsetZ = 0;
+			
+				//rotation offset
+				povRotateOffsetX = 0;
+				povRotateOffsetY = 0;
+				povRotateOffsetZ = 0;
+				
 				transform.position = new Vector3(camPos.x + povOffsetX, camPos.y + povOffsetY, camPos.z + povOffsetZ);
-				//transform.rotation = 
+				
+				//take cam rotation and ship rotation and set it
+				cam.transform.eulerAngles = new Vector3(povRotateOffsetX,
+								        povRotateOffsetY,
+								        povRotateOffsetZ);
+
+		}
+		else if(modes == CtrlModes.mode4Isometric){
+			
+			        //move the ship to xyz offset from camera
+				povOffsetX = 0.03f;
+				povOffsetY = -0.69f;
+				povOffsetZ = 0;
+			
+				//rotation offset
+				povRotateOffsetX = 0;
+				povRotateOffsetY = 0;
+				povRotateOffsetZ = 0;
+				
+				transform.position = new Vector3(camPos.x + povOffsetX, camPos.y + povOffsetY, camPos.z + povOffsetZ);
+				
+				//take cam rotation and ship rotation and set it
+				cam.transform.eulerAngles = new Vector3(povRotateOffsetX,
+								        povRotateOffsetY,
+								        povRotateOffsetZ);
+
 		}
 		else{}
 	}
