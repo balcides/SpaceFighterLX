@@ -26,6 +26,8 @@ public class Inputs : MonoBehaviour {
 	public float inputMoveHorizontal;
 	private float PlayerSpeed;
 	
+	private GameObject cam;
+	
     inputType controlsUsed (inputType controls)
     {
         if(controls == inputType.ios){ 			print("iOS controls enabled"); }
@@ -40,6 +42,8 @@ public class Inputs : MonoBehaviour {
     }
 	
 	void Awake(){
+		
+		cam = GameObject.FindWithTag("MainCamera");
 		assets = GetComponent<Assets>();
 		playerShip = assets.playerShipGO.transform;										//grabs the player ship model from the assets
 		playerScript = playerShip.GetComponent<PlayerShip>();
@@ -78,6 +82,9 @@ public class Inputs : MonoBehaviour {
 		if(playerScript.modes == PlayerShip.CtrlModes.mode1Starfox){ 
 			if(playerScript.invertY){playerShip.Translate(inputMoveHorizontal, 0, -inputMoveVertical); }
 			else{ playerShip.Translate(inputMoveHorizontal, 0, inputMoveVertical); }
+		}
+		else if(playerScript.modes == PlayerShip.CtrlModes.mode2POV){
+			cam.transform.Translate(inputMoveHorizontal, inputMoveVertical,0);
 		}
 		else{}
 		
