@@ -35,13 +35,18 @@ public class PlayerShip : MonoBehaviour {
 	private Vector3 camPos;
 	
 	//Position
-	public float povOffsetX;
-	public float povOffsetY;
-	public float povOffsetZ;
+	public float povShipPosOffsetX;
+	public float povShipPosOffsetY;
+	public float povShipPosOffsetZ;
 	
-	public float povRotateOffsetX;
-	public float povRotateOffsetY;
-	public float povRotateOffsetZ;
+	//rotation
+	public float povCamRotateOffsetX;
+	public float povCamRotateOffsetY;
+	public float povCamRotateOffsetZ;
+	
+	public float povShipRotateOffsetX;
+	public float povShipRotateOffsetY;
+	public float povShipRotateOffsetZ;
 	
 
 	Transform Asset; //Not sure but I kept this from my notes
@@ -90,61 +95,104 @@ public class PlayerShip : MonoBehaviour {
 			cam.transform.eulerAngles = new Vector3(0,0,0);
 			
 			//move the ship to xyz offset from camera
-			povOffsetZ = 4.5f;
-			transform.position = new Vector3(transform.position.x, transform.position.y, camPos.z + povOffsetZ);
+			povShipPosOffsetZ = 4.5f;
+			transform.position = new Vector3(transform.position.x, transform.position.y, camPos.z + povShipPosOffsetZ);
 	
 		}
 		else if(modes == CtrlModes.mode2POV){
 			
-			//move the ship to xyz offset from camera
-			povOffsetX = 0.03f;
-			povOffsetY = -0.69f;
-			povOffsetZ = 0;
 			
-			transform.position = new Vector3(camPos.x + povOffsetX, camPos.y + povOffsetY, camPos.z + povOffsetZ);
+			//move the ship to xyz offset from camera
+			povShipPosOffsetX = 0f;
+			povShipPosOffsetY = -0.94f;
+			povShipPosOffsetZ = 0.36f;
+			
+			//rotation offset
+			povShipRotateOffsetX = 90f;
+			povShipRotateOffsetY = 0;
+			povShipRotateOffsetZ = 0;
+		
+			povCamRotateOffsetX = 0;
+			povCamRotateOffsetY = 0;
+			povCamRotateOffsetZ = 0;
+			
+			//ship transform
+			shipOffset(povShipPosOffsetX,povShipPosOffsetY,povShipPosOffsetZ,povShipRotateOffsetX, povShipRotateOffsetY, povShipRotateOffsetZ);
+		
+			//take cam rotation and ship rotation and set it
+			cameraOffset(povCamRotateOffsetX, povCamRotateOffsetY, povCamRotateOffsetZ);
 			
 		}
 		else if(modes == CtrlModes.mode3SideScroller){
 			
-			        //move the ship to xyz offset from camera
-				povOffsetX = 0.03f;
-				povOffsetY = -0.69f;
-				povOffsetZ = 0;
+			    //move the ship to xyz offset from camera
+				povShipPosOffsetX = -5.24f;
+				povShipPosOffsetY = 0;
+				povShipPosOffsetZ = 0;
 			
 				//rotation offset
-				povRotateOffsetX = 0;
-				povRotateOffsetY = 0;
-				povRotateOffsetZ = 0;
+				povShipRotateOffsetX = 90f;
+				povShipRotateOffsetY = 0;
+				povShipRotateOffsetZ = 0;
+			
+				povCamRotateOffsetX = 0;
+				povCamRotateOffsetY = -90f;
+				povCamRotateOffsetZ = 0;
 				
-				transform.position = new Vector3(camPos.x + povOffsetX, camPos.y + povOffsetY, camPos.z + povOffsetZ);
-				
+				//ship transform
+				shipOffset(povShipPosOffsetX,povShipPosOffsetY,povShipPosOffsetZ,povShipRotateOffsetX, povShipRotateOffsetY, povShipRotateOffsetZ);
+			
 				//take cam rotation and ship rotation and set it
-				cam.transform.eulerAngles = new Vector3(povRotateOffsetX,
-								        povRotateOffsetY,
-								        povRotateOffsetZ);
+				cameraOffset(povCamRotateOffsetX, povCamRotateOffsetY, povCamRotateOffsetZ);
 
 		}
 		else if(modes == CtrlModes.mode4Isometric){
 			
-			        //move the ship to xyz offset from camera
-				povOffsetX = 0.03f;
-				povOffsetY = -0.69f;
-				povOffsetZ = 0;
+			/*
+			    //move the ship to xyz offset from camera
+				povShipPosOffsetX = -5.24f;
+				povShipPosOffsetY = 0;
+				povShipPosOffsetZ = 0;
 			
 				//rotation offset
-				povRotateOffsetX = 0;
-				povRotateOffsetY = 0;
-				povRotateOffsetZ = 0;
-				
-				transform.position = new Vector3(camPos.x + povOffsetX, camPos.y + povOffsetY, camPos.z + povOffsetZ);
-				
+				povShipRotateOffsetX = 90f;
+				povShipRotateOffsetY = 0;
+				povShipRotateOffsetZ = 0;
+			
+				povCamRotateOffsetX = 0;
+				povCamRotateOffsetY = -90f;
+				povCamRotateOffsetZ = 0;
+				*/
+			
+				//ship transform
+				shipOffset(povShipPosOffsetX,povShipPosOffsetY,povShipPosOffsetZ,povShipRotateOffsetX, povShipRotateOffsetY, povShipRotateOffsetZ);
+			
 				//take cam rotation and ship rotation and set it
-				cam.transform.eulerAngles = new Vector3(povRotateOffsetX,
-								        povRotateOffsetY,
-								        povRotateOffsetZ);
+				cameraOffset(povCamRotateOffsetX, povCamRotateOffsetY, povCamRotateOffsetZ);
 
 		}
 		else{}
 	}
 	
+	//Method for camera rotation and transform offset
+	void cameraOffset(float camRotOffsetX, float camRotOffsetY, float camRotOffsetZ){
+				
+		
+				//take cam rotation and ship rotation and set it
+				cam.transform.eulerAngles = new Vector3(camRotOffsetX, camRotOffsetY, camRotOffsetZ);
+		
+	}
+	
+	//Method for ship rotation and transform offset
+	void shipOffset(float camPosOffsetX, float camPosOffsetY, float camPosOffsetZ, float povShipRotOffsetX, float povShipRotOffsetY, float povShipRotOffsetZ){
+		
+				transform.position = new Vector3(camPos.x + camPosOffsetX, 
+												 camPos.y + camPosOffsetY, 
+												 camPos.z + camPosOffsetZ);
+				
+				// ship rotation
+				transform.eulerAngles = new Vector3(povShipRotOffsetX,
+											        povShipRotOffsetY,
+											        povShipRotOffsetZ);
+	}
 }
