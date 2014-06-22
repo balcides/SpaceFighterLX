@@ -39,6 +39,7 @@ public class PlayerShip : MonoBehaviour {
 	public float povShipPosOffsetX;
 	public float povShipPosOffsetY;
 	public float povShipPosOffsetZ;
+	public float shipCamDiff;
 	
 	//rotation
 	public float povShipRotateOffsetX;
@@ -94,16 +95,15 @@ public class PlayerShip : MonoBehaviour {
 			//take cam rotation and ship rotation and set it
 			//cam.transform.eulerAngles = new Vector3(0,0,0);
 			
-			
 			//move the ship to xyz offset from camera
-			//povShipPosOffsetX = 0f;
-			//povShipPosOffsetY = 0f;
-			povShipPosOffsetZ = 4.5f;
+			povShipPosOffsetX = transform.position.x;
+			povShipPosOffsetY = transform.position.y;
+			povShipPosOffsetZ = camPos.z + 4.5f;
 			
 			//rotation offset
 			povShipRotateOffsetX = 90f;
-			povShipRotateOffsetY = 0;
-			povShipRotateOffsetZ = 0;
+			povShipRotateOffsetY = 0f;
+			povShipRotateOffsetZ = 0f;
 		
 			povCamRotateOffsetX = 0;
 			povCamRotateOffsetY = 0;
@@ -111,8 +111,10 @@ public class PlayerShip : MonoBehaviour {
 			
 			
 			//transform.position = new Vector3(transform.position.x, transform.position.y, camPos.z + povShipPosOffsetZ);
+			shipOffset(povShipPosOffsetX,povShipPosOffsetY,povShipPosOffsetZ,povShipRotateOffsetX, povShipRotateOffsetY, povShipRotateOffsetZ, true);
 			
-			shipOffset(transform.position.x,transform.position.y,povShipPosOffsetZ,povShipRotateOffsetX, povShipRotateOffsetY, povShipRotateOffsetZ, true);
+			//take cam rotation and ship rotation and set it
+			cameraOffset(povCamRotateOffsetX, povCamRotateOffsetY, povCamRotateOffsetZ);
 	
 		}
 		else if(modes == CtrlModes.mode2POV){
@@ -138,50 +140,64 @@ public class PlayerShip : MonoBehaviour {
 			//take cam rotation and ship rotation and set it
 			cameraOffset(povCamRotateOffsetX, povCamRotateOffsetY, povCamRotateOffsetZ);
 			
+
+			
 		}
 		else if(modes == CtrlModes.mode3SideScroller){
-			
-			    //move the ship to xyz offset from camera
-				povShipPosOffsetX = -5.24f;
-				povShipPosOffsetY = 0;
-				povShipPosOffsetZ = 0;
-			
-				//rotation offset
-				povShipRotateOffsetX = 90f;
-				povShipRotateOffsetY = 0;
-				povShipRotateOffsetZ = 0;
-			
-				povCamRotateOffsetX = 0;
-				povCamRotateOffsetY = -90f;
-				povCamRotateOffsetZ = 0;
 				
-				//ship transform
-				shipOffset(povShipPosOffsetX,povShipPosOffsetY,povShipPosOffsetZ,povShipRotateOffsetX, povShipRotateOffsetY, povShipRotateOffsetZ, false);
 			
-				//take cam rotation and ship rotation and set it
-				cameraOffset(povCamRotateOffsetX, povCamRotateOffsetY, povCamRotateOffsetZ);
+			shipCamDiff = camPos.z - transform.position.z;
+		
+		    //move the ship to xyz offset from camera
+			povShipPosOffsetX = camPos.x + -5.24f;
+			povShipPosOffsetY = transform.position.y;
+		
+			if(transform.position.z < 2){
+			povShipPosOffsetZ = transform.position.z + 0.1f;}
+			else{povShipPosOffsetZ = transform.position.z;}
+		
+			//rotation offset
+			povShipRotateOffsetX = 90f;
+			povShipRotateOffsetY = 0;
+			povShipRotateOffsetZ = 0;
+		
+			povCamRotateOffsetX = 0;
+			povCamRotateOffsetY = -90f;
+			povCamRotateOffsetZ = 0;
+			
+			//ship transform
+			shipOffset(povShipPosOffsetX, povShipPosOffsetY, povShipPosOffsetZ, povShipRotateOffsetX, povShipRotateOffsetY, povShipRotateOffsetZ, true);
+		
+			//take cam rotation and ship rotation and set it
+			cameraOffset(povCamRotateOffsetX, povCamRotateOffsetY, povCamRotateOffsetZ);
 
 		}
+		//MODE4
 		else if(modes == CtrlModes.mode4Isometric){
 			
-			/*
-			    //move the ship to xyz offset from camera
-				povShipPosOffsetX = -5.24f;
-				povShipPosOffsetY = 0;
-				povShipPosOffsetZ = 0;
+	
 			
+			    //move the ship to xyz offset from camera
+				povShipPosOffsetX = transform.position.x;
+				povShipPosOffsetY = -4.5f;
+				povShipPosOffsetZ = transform.position.z;
+
 				//rotation offset
 				povShipRotateOffsetX = 90f;
 				povShipRotateOffsetY = 0;
 				povShipRotateOffsetZ = 0;
 			
-				povCamRotateOffsetX = 0;
-				povCamRotateOffsetY = -90f;
+				povCamRotateOffsetX = 45f;
+				povCamRotateOffsetY = -45f;
 				povCamRotateOffsetZ = 0;
-				*/
+				
+				transform.eulerAngles = new Vector3(povShipRotateOffsetX,
+								        povShipRotateOffsetY,
+								        povShipRotateOffsetZ);
 			
+				transform.position = new Vector3(povShipPosOffsetX, povShipPosOffsetY, povShipPosOffsetZ);
 				//ship transform
-				shipOffset(povShipPosOffsetX,povShipPosOffsetY,povShipPosOffsetZ,povShipRotateOffsetX, povShipRotateOffsetY, povShipRotateOffsetZ, false);
+				//shipOffset(povShipPosOffsetX,povShipPosOffsetY, povShipPosOffsetZ, povShipRotateOffsetX, povShipRotateOffsetY, povShipRotateOffsetZ, true);
 			
 				//take cam rotation and ship rotation and set it
 				cameraOffset(povCamRotateOffsetX, povCamRotateOffsetY, povCamRotateOffsetZ);
@@ -205,7 +221,8 @@ public class PlayerShip : MonoBehaviour {
 		
 			if(lockToCam){
 			
-				transform.position = new Vector3(transform.position.x, transform.position.y, camPos.z + povShipPosOffsetZ); 
+				//transform.position = new Vector3(transform.position.x, transform.position.y, camPos.z + povShipPosOffsetZ); 
+				transform.position = new Vector3(shipPosOffsetX, shipPosOffsetY, shipPosOffsetZ);
 			}
 			else{
 				transform.position = new Vector3(camPos.x + shipPosOffsetX, 

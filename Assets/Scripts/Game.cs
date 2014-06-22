@@ -23,6 +23,7 @@ public class Game : MonoBehaviour {
 	private Menu menu;
 	private Assets assets;
 	private PlayerShip playerShip;
+	private Score score;
 	private GameObject playerAsset;
 	
 	public Transform spawnerGO;
@@ -41,6 +42,7 @@ public class Game : MonoBehaviour {
 			spawner = GetComponent<Spawner>();
 			weaponSystem = GetComponent<WeaponSystem>();
 			assets = GetComponent<Assets>();
+			score = GetComponent<Score>();
 			
 
 			
@@ -82,7 +84,9 @@ public class Game : MonoBehaviour {
 		if(!playerAsset){ playerShip = null;}
 		else{ 
 			playerShip = playerAsset.GetComponent<PlayerShip>();	
-			livesText.text = "Lives " + playerShip.playerLives.ToString("00"); }
+			livesText.text = "Lives " + playerShip.playerLives.ToString("00"); 
+			scoreText.text = "Score" + score.levelScore.ToString("00000");
+		}
 	}
 	
 

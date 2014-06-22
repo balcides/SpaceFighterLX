@@ -16,9 +16,13 @@ using System.Collections;
 public class Inputs : MonoBehaviour {
 	
 	public enum inputType {ios, iCade, osx, pc, android, oculous};
+	public enum CtrlModes {mode1Starfox, mode2POV, mode3SideScroller, mode4Isometric};
+	
 	public inputType controls;
+	public CtrlModes modes;
 	
 	Transform playerShip;
+	Transform camParent;
 	PlayerShip playerScript;
 	Assets assets;
 	
@@ -50,6 +54,7 @@ public class Inputs : MonoBehaviour {
 		playerScript = playerShip.GetComponent<PlayerShip>();
 		PlayerSpeed = playerScript.playerSpeed;											//grabs player speed from the ship's script on startup
 		PlayerThrusterSpeed = playerScript.playerThrusterSpeed; 						//grabs players thruster speed
+		camParent = cam.transform.parent;
 		
 	}
 	
@@ -68,9 +73,19 @@ public class Inputs : MonoBehaviour {
 	
 	//Decides which input script to use set by the inputType enum
 	void runInputHandler(){
+		
 		if(controls == inputType.osx){ osxInput(); }
 		else{}
 		
+		if(modes == CtrlModes.mode1Starfox){
+			playerScript.modes = PlayerShip.CtrlModes.mode1Starfox;}
+		else if(modes == CtrlModes.mode2POV){
+			playerScript.modes = PlayerShip.CtrlModes.mode2POV;}
+		else if(modes == CtrlModes.mode3SideScroller){
+			playerScript.modes = PlayerShip.CtrlModes.mode3SideScroller;}
+		else if(modes == CtrlModes.mode4Isometric){
+			playerScript.modes = PlayerShip.CtrlModes.mode4Isometric;}
+		else{}
 		
 	}
 	
@@ -81,6 +96,7 @@ public class Inputs : MonoBehaviour {
 		inputMoveVertical = Input.GetAxis("Vertical") * PlayerSpeed * Time.deltaTime;
 		inputMoveHorizontal = Input.GetAxis("Horizontal") * PlayerSpeed * Time.deltaTime;
 		
+		//MODE1
 		if(playerScript.modes == PlayerShip.CtrlModes.mode1Starfox){ 
 			
 			cam.transform.Translate(0, 0, PlayerThrusterSpeed * Time.deltaTime); 
@@ -89,12 +105,25 @@ public class Inputs : MonoBehaviour {
 			else{ playerShip.Translate(inputMoveHorizontal, 0, inputMoveVertical); }
 			
 		}
-		
+		//MODE2
 		else if(playerScript.modes == PlayerShip.CtrlModes.mode2POV){
-			cam.transform.Translate(inputMoveHorizontal, inputMoveVertical,0);
+			cam.transform.Translate(inputMoveHorizontal, inputMoveVertical, PlayerThrusterSpeed * Time.deltaTime);
 		}
+		//MODE3
 		else if(playerScript.modes == PlayerShip.CtrlModes.mode3SideScroller){
-			cam.transform.Translate(inputMoveHorizontal, inputMoveVertical,0);
+			//cam.transform.Translate(inputMoveHorizontal, inputMoveVertical,0);
+			
+			cam.transform.Translate(PlayerThrusterSpeed * Time.deltaTime, 0, 0); 
+			
+			playerShip.Translate(cam.transform.position.x, inputMoveHorizontal, -inputMoveVertical); 
+		}
+		//MODE4
+		else if(playerScript.modes == PlayerShip.CtrlModes.mode4Isometric){
+			//cam.transform.Translate(inputMoveHorizontal, inputMoveVertical,0);
+			camParent.Translate(0, 0, PlayerThrusterSpeed * Time.deltaTime); 
+			
+			//cam.transform.Translate(0, 0, PlayerThrusterSpeed * Time.deltaTime); 
+			playerShip.Translate(inputMoveHorizontal, inputMoveVertical, 0);
 		}
 		else{}
 		
