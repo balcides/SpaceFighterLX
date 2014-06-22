@@ -25,6 +25,7 @@ public class Inputs : MonoBehaviour {
 	public float inputMoveVertical;
 	public float inputMoveHorizontal;
 	private float PlayerSpeed;
+	private float PlayerThrusterSpeed;
 	
 	private GameObject cam;
 	
@@ -47,7 +48,8 @@ public class Inputs : MonoBehaviour {
 		assets = GetComponent<Assets>();
 		playerShip = assets.playerShipGO.transform;										//grabs the player ship model from the assets
 		playerScript = playerShip.GetComponent<PlayerShip>();
-		PlayerSpeed = playerScript.playerSpeed;	//grabs player speed from the ship's script on startup
+		PlayerSpeed = playerScript.playerSpeed;											//grabs player speed from the ship's script on startup
+		PlayerThrusterSpeed = playerScript.playerThrusterSpeed; 						//grabs players thruster speed
 		
 	}
 	
@@ -80,10 +82,18 @@ public class Inputs : MonoBehaviour {
 		inputMoveHorizontal = Input.GetAxis("Horizontal") * PlayerSpeed * Time.deltaTime;
 		
 		if(playerScript.modes == PlayerShip.CtrlModes.mode1Starfox){ 
-			if(playerScript.invertY){playerShip.Translate(inputMoveHorizontal, 0, -inputMoveVertical); }
+			
+			cam.transform.Translate(0, 0, PlayerThrusterSpeed * Time.deltaTime); 
+			
+			if(playerScript.invertY){ playerShip.Translate(inputMoveHorizontal, 0, -inputMoveVertical); }
 			else{ playerShip.Translate(inputMoveHorizontal, 0, inputMoveVertical); }
+			
 		}
+		
 		else if(playerScript.modes == PlayerShip.CtrlModes.mode2POV){
+			cam.transform.Translate(inputMoveHorizontal, inputMoveVertical,0);
+		}
+		else if(playerScript.modes == PlayerShip.CtrlModes.mode3SideScroller){
 			cam.transform.Translate(inputMoveHorizontal, inputMoveVertical,0);
 		}
 		else{}
