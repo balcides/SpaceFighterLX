@@ -69,17 +69,20 @@ public class Menu : MonoBehaviour {
 		scoreButton = GameObject.Find("Button-scores");
 		
 		if(startButton == null || optionsButton == null || scoreButton == null){
-			Debug.LogError("One or more of the button objects are missing or dont have thier proper scripts assigned (gabeNote)");
+			//Debug.LogError("One or more of the button objects are missing or dont have thier proper scripts assigned (gabeNote)");
+		}
+		else{
+			//check the connection of the menu buttons
+			//check if the buttons exist and if the script is attached.
+			MenuButtons = optionsButton.GetComponent<menuButtons>();
+			if(MenuButtons.safetyCheck()){ }else{ Debug.LogError("optionsButton missing scripts"); }
+			MenuButtons = startButton.GetComponent<menuButtons>();
+			if(MenuButtons.safetyCheck()){ }else{ Debug.LogError("startButton missing scripts"); }
+			MenuButtons = scoreButton.GetComponent<menuButtons>();
+			if(MenuButtons.safetyCheck()){ }else{ Debug.LogError("scoreButton missing scripts"); }
 		}
 		
-		//check the connection of the menu buttons
-		//check if the buttons exist and if the script is attached.
-		MenuButtons = optionsButton.GetComponent<menuButtons>();
-		if(MenuButtons.safetyCheck()){ }else{ Debug.LogError("optionsButton missing scripts"); }
-		MenuButtons = startButton.GetComponent<menuButtons>();
-		if(MenuButtons.safetyCheck()){ }else{ Debug.LogError("startButton missing scripts"); }
-		MenuButtons = scoreButton.GetComponent<menuButtons>();
-		if(MenuButtons.safetyCheck()){ }else{ Debug.LogError("scoreButton missing scripts"); }
+
 	}
 
 }

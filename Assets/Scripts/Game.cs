@@ -31,12 +31,23 @@ public class Game : MonoBehaviour {
 	
 	public TextMesh livesText;
 	public TextMesh scoreText;
-	
+
+	//private livesText LivesText;
+
 	//requires components if the game is not a menu
 	private void initilizeGame(){
 		if(isGameMenu){
 			menu = GetComponent<Menu>();
 			menu.systemsCheck();
+
+			livesText.renderer.enabled = false;
+			livesText.gameObject.SetActive(false);
+			livesText.gameObject.renderer.enabled = false;
+			livesText.GetComponent<MeshRenderer>().enabled = false;
+
+			score = GetComponent<Score>();
+
+
 		}
 		else{
 			spawner = GetComponent<Spawner>();
@@ -64,7 +75,7 @@ public class Game : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+
 	}
 	
 	// Update is called once per frame
