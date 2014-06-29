@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections;
+using System;
+
 
 /// <summary>
 /// Score system.cs
@@ -13,6 +15,16 @@ public class Score : MonoBehaviour {
     public int topScore = 0;       //overall top score
     public int levelScore = 0;     //current level score until mission complete then reset
     public int gameScore = 0;      //the overall score for the game after several levels
+
+	public Vector2 boxStartLocation;
+
+	public _GUIClasses center;
+
+	void Awake(){
+
+		center = GetComponent<_GUIClasses>();
+
+	}
 	
 	// Use this for initialization
 	void Start () {
@@ -21,7 +33,7 @@ public class Score : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		center.location.updateLocation();
 	}
 	
 	public class Scores
@@ -34,5 +46,10 @@ public class Score : MonoBehaviour {
 	}
 	
 	public Scores scores = new Scores();
+	
+
+	void OnGUI() {
+		GUI.Box(new Rect(center.location.offset.x + boxStartLocation.x, center.location.offset.y + boxStartLocation.y, 120, 30), "This is a title");
+	}
 	
 }
