@@ -19,6 +19,7 @@ public class Score : MonoBehaviour {
 	public Vector2 boxStartLocation;
 	public _GUIClasses center;
 	public GUIStyle textGUIStyle;
+	public float heightOffset = 50;
 
 	public string[] highscoreName = new string[10];
 
@@ -38,6 +39,9 @@ public class Score : MonoBehaviour {
 		highscoreName[7] = "Gilbert";
 		highscoreName[8] = "Hopper";
 		highscoreName[9] = "Wilfredo";
+
+		boxStartLocation = new Vector2(-300,-200);
+		heightOffset = 50;
 
 	}
 	
@@ -66,7 +70,9 @@ public class Score : MonoBehaviour {
 	void OnGUI() {
 
 		for( int i = 0; i < 9; i++){
-		GUI.Box(new Rect(center.location.offset.x + boxStartLocation.x, center.location.offset.y + boxStartLocation.y, 120, 30), highscoreName[i], textGUIStyle);
+			GUI.Box(new Rect(center.location.offset.x + boxStartLocation.x, 
+			                 center.location.offset.y + boxStartLocation.y + i * heightOffset, 120, 30),
+			        		 highscoreName[i], textGUIStyle);
 		}
 	}
 	
