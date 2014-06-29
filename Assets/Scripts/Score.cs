@@ -17,18 +17,33 @@ public class Score : MonoBehaviour {
     public int gameScore = 0;      //the overall score for the game after several levels
 
 	public Vector2 boxStartLocation;
-
 	public _GUIClasses center;
+	public GUIStyle textGUIStyle;
+
+	public string[] highscoreName = new string[10];
+
+
 
 	void Awake(){
 
 		center = GetComponent<_GUIClasses>();
 
+		highscoreName[0] = "Juan";
+		highscoreName[1] = "Kelper";
+		highscoreName[2] = "Harper";
+		highscoreName[3] = "Don";
+		highscoreName[4] = "Cisco Kid";
+		highscoreName[5] = "Unitee";
+		highscoreName[6] = "Gebee";
+		highscoreName[7] = "Gilbert";
+		highscoreName[8] = "Hopper";
+		highscoreName[9] = "Wilfredo";
+
 	}
 	
 	// Use this for initialization
 	void Start () {
-	
+
 	}
 	
 	// Update is called once per frame
@@ -49,7 +64,10 @@ public class Score : MonoBehaviour {
 	
 
 	void OnGUI() {
-		GUI.Box(new Rect(center.location.offset.x + boxStartLocation.x, center.location.offset.y + boxStartLocation.y, 120, 30), "This is a title");
+
+		for( int i = 0; i < 9; i++){
+		GUI.Box(new Rect(center.location.offset.x + boxStartLocation.x, center.location.offset.y + boxStartLocation.y, 120, 30), highscoreName[i], textGUIStyle);
+		}
 	}
 	
 }
