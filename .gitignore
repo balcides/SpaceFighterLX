@@ -5,11 +5,7 @@ Temp/
 Obj/
 UnityGenerated/
 Library/
-<<<<<<< HEAD
- 
-=======
 
->>>>>>> master
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
 # ===================================== #
@@ -24,10 +20,6 @@ ExportedObj/
 *.unityproj
 *.booproj
 
-<<<<<<< HEAD
- 
-=======
->>>>>>> master
 # ============ #
 # OS generated #
 # ============ #
@@ -42,18 +34,17 @@ Thumbs.db
 *.dll
 *.db
 
-<<<<<<< HEAD
 # ============ #
 # Art Assets   #
 # ============ #
 *.psd
 *.tga
 *.fbx
-=======
+
 # ============  #
 # Art generated #
 # ============  #
 *.psd
 *.tga
 *.fbx
->>>>>>> master
+

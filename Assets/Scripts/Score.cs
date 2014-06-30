@@ -11,7 +11,9 @@ using System;
 /// </summary>
 
 public class Score : MonoBehaviour {
-	
+
+	private Game game;
+
     public int topScore = 0;       //overall top score
     public int levelScore = 0;     //current level score until mission complete then reset
     public int gameScore = 0;      //the overall score for the game after several levels
@@ -41,6 +43,8 @@ public class Score : MonoBehaviour {
 	void Awake(){
 
 		center = GetComponent<_GUIClasses>();
+		game = GetComponent<Game>();
+
 		boxStartLocation = new Vector2(-300,-200);
 		heightOffset = 32;
 
@@ -89,25 +93,27 @@ public class Score : MonoBehaviour {
 
 	void OnGUI() {
 
-		// TITLE GUI
-		GUI.Box(new Rect(center.location.offset.x + titleOffset.x, 
+		if (game.isGameMenu == true) {
+						// TITLE GUI
+						GUI.Box (new Rect (center.location.offset.x + titleOffset.x, 
 		                 center.location.offset.y + titleOffset.y, 120, 30),
-		        "Name            Rounds         Kills", titleGUIStyle);
+		        		"Name            Rounds         Kills", titleGUIStyle);
 
-		//SCORE - info gui text
-		for( int i = 0; i < numOfScoresToDisplay; i++){
-			GUI.Box(new Rect(center.location.offset.x + namesOffset.x, 
+						//SCORE - info gui text
+						for (int i = 0; i < numOfScoresToDisplay; i++) {
+								GUI.Box (new Rect (center.location.offset.x + namesOffset.x, 
 			                 center.location.offset.y + namesOffset.y + i * heightOffset, 120, 30),
-			        		 score[i].name, namesGUIStyle);
+			        		 score [i].name, namesGUIStyle);
 
-			GUI.Box(new Rect(center.location.offset.x + roundsOffset.x, 
+								GUI.Box (new Rect (center.location.offset.x + roundsOffset.x, 
 			                 center.location.offset.y + roundsOffset.y + i * heightOffset, 120, 30),
-			       			 score[i].rounds.ToString(), killsGUIStyle);
+			       			 score [i].rounds.ToString (), killsGUIStyle);
 
-			GUI.Box(new Rect(center.location.offset.x + killsOffset.x, 
+								GUI.Box (new Rect (center.location.offset.x + killsOffset.x, 
 			                 center.location.offset.y + killsOffset.y + i * heightOffset, 120, 30),
-			       			 score[i].kills.ToString(), roundsGUIStyle);
-		}
+			       			 score [i].kills.ToString (), roundsGUIStyle);
+						}
+				} else {}
 	}
 
 	public class Scores{
