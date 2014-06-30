@@ -43,6 +43,7 @@ public class menuButtons : MonoBehaviour {
 			
 			case "Button-scores":
 				Debug.Log("cube SCORES working");
+				Application.LoadLevel("HighScore");
 				break;
 			
 			case "Button-options":
