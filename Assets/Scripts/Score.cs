@@ -30,6 +30,8 @@ public class Score : MonoBehaviour {
 	public Vector2 roundsOffset;
 	public Vector2 killsOffset;
 
+	public int numOfScoresToDisplay;
+
 	public Scores scores = new Scores();
 
 
@@ -42,10 +44,13 @@ public class Score : MonoBehaviour {
 		boxStartLocation = new Vector2(-300,-200);
 		heightOffset = 32;
 
-		titleOffset = new Vector2(-254, -215);
-		namesOffset = new Vector2(-254, -137);
-		roundsOffset = new Vector2(-71, -137);
-		killsOffset = new Vector2(66, -137);
+		titleOffset = new Vector2(-232, -190);
+		namesOffset = new Vector2(-232, -124);
+		roundsOffset = new Vector2(-52, -137);
+		killsOffset = new Vector2(90, -137);
+		numOfScoresToDisplay = 8;
+
+
 
 		for( int i = 0; i < 10; i++){ score[i] = new Highscore(); }
 
@@ -90,7 +95,7 @@ public class Score : MonoBehaviour {
 		        "Name            Rounds         Kills", titleGUIStyle);
 
 		//SCORE - info gui text
-		for( int i = 0; i < 9; i++){
+		for( int i = 0; i < numOfScoresToDisplay; i++){
 			GUI.Box(new Rect(center.location.offset.x + namesOffset.x, 
 			                 center.location.offset.y + namesOffset.y + i * heightOffset, 120, 30),
 			        		 score[i].name, namesGUIStyle);
