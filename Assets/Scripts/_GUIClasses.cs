@@ -9,6 +9,7 @@ using System.Collections.Generic;
 /// 
 /// </summary>
 
+[System.Serializable]
 public class _GUIClasses : MonoBehaviour {
 
 	[SerializeField]
