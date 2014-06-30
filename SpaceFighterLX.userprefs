@@ -1,8 +1,10 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="../../../Unity/spaceFighter/Assets/Scripts/Enemy.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Score.cs">
     <Files>
-      <File FileName="../../../Unity/spaceFighter/Assets/Scripts/Enemy.cs" Line="17" Column="1" />
+      <File FileName="Assets\Scripts\Score.cs" Line="90" Column="36" />
+      <File FileName="Assets\Scripts\Game.cs" Line="40" Column="32" />
+      <File FileName=".gitignore" Line="43" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
