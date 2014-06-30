@@ -18,7 +18,11 @@ public class Score : MonoBehaviour {
 
 	public Vector2 boxStartLocation;
 	public _GUIClasses center;
-	public GUIStyle textGUIStyle;
+
+	public GUIStyle titleGUIStyle;
+	public GUIStyle namesGUIStyle;
+	public GUIStyle killsGUIStyle;
+	public GUIStyle roundsGUIStyle;
 
 	public float heightOffset = 50;
 	public Vector2 titleOffset;
@@ -40,8 +44,8 @@ public class Score : MonoBehaviour {
 
 		titleOffset = new Vector2(-254, -215);
 		namesOffset = new Vector2(-254, -137);
-		roundsOffset = new Vector2(-51, -137);
-		killsOffset = new Vector2(145, -137);
+		roundsOffset = new Vector2(-71, -137);
+		killsOffset = new Vector2(66, -137);
 
 		for( int i = 0; i < 10; i++){ score[i] = new Highscore(); }
 
@@ -83,21 +87,21 @@ public class Score : MonoBehaviour {
 		// TITLE GUI
 		GUI.Box(new Rect(center.location.offset.x + titleOffset.x, 
 		                 center.location.offset.y + titleOffset.y, 120, 30),
-		        "Name            Rounds         Kills", textGUIStyle);
+		        "Name            Rounds         Kills", titleGUIStyle);
 
 		//SCORE - info gui text
 		for( int i = 0; i < 9; i++){
 			GUI.Box(new Rect(center.location.offset.x + namesOffset.x, 
 			                 center.location.offset.y + namesOffset.y + i * heightOffset, 120, 30),
-			        		 score[i].name, textGUIStyle);
+			        		 score[i].name, namesGUIStyle);
 
 			GUI.Box(new Rect(center.location.offset.x + roundsOffset.x, 
 			                 center.location.offset.y + roundsOffset.y + i * heightOffset, 120, 30),
-			        	     score[i].rounds.ToString(), textGUIStyle);
+			       			 score[i].rounds.ToString(), killsGUIStyle);
 
 			GUI.Box(new Rect(center.location.offset.x + killsOffset.x, 
 			                 center.location.offset.y + killsOffset.y + i * heightOffset, 120, 30),
-			       			 score[i].kills.ToString(), textGUIStyle);
+			       			 score[i].kills.ToString(), roundsGUIStyle);
 		}
 	}
 
