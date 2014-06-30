@@ -6,13 +6,16 @@ Obj/
 UnityGenerated/
 Library/
 Assets/Standard Assets (Mobile)/
-
+Assets/Standard Assets (Mobile)/Materials/grid.mat
+Assets/Standard Assets (Mobile)/Materials/grid.mat
+Assets/Standard Assets (Mobile).meta
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
 # ===================================== #
 ExportedObj/
 *.svd
 *.userprefs
+SpaceFighterLX.userprefs
 *.csproj
 *.pidb
 *.suo
@@ -20,7 +23,6 @@ ExportedObj/
 *.user
 *.unityproj
 *.booproj
-
 # ============ #
 # OS generated #
 # ============ #
@@ -34,19 +36,15 @@ ehthumbs.db
 Thumbs.db
 *.dll
 *.db
-
 # ============ #
 # Art Assets   #
 # ============ #
 *.psd
 *.tga
 *.fbx
-
 # ============  #
 # Art generated #
 # ============  #
 *.psd
 *.tga
 *.fbx
-Assets/Standard Assets (Mobile)/Materials/grid.mat
-Assets/Standard Assets (Mobile)/Materials/grid.mat
