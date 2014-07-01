@@ -37,7 +37,7 @@ public class Score : MonoBehaviour {
 	public Scores scores = new Scores();
 
 
-	public Highscore[] score = new Highscore[10];
+	public Scores[] score = new Scores[10];
 
 
 	void Awake(){
@@ -46,17 +46,17 @@ public class Score : MonoBehaviour {
 		game = GetComponent<Game>();
 
 		boxStartLocation = new Vector2(-300,-200);
-		heightOffset = 32;
+		heightOffset = 45;
 
-		titleOffset = new Vector2(-232, -190);
-		namesOffset = new Vector2(-232, -124);
-		roundsOffset = new Vector2(-52, -137);
-		killsOffset = new Vector2(90, -137);
+		titleOffset = new Vector2(-232, -238);
+		namesOffset = new Vector2(-232, -150);
+		roundsOffset = new Vector2(-52, -150);
+		killsOffset = new Vector2(90, -150);
 		numOfScoresToDisplay = 8;
 
 
 
-		for( int i = 0; i < 10; i++){ score[i] = new Highscore(); }
+		for( int i = 0; i < 10; i++){ score[i] = new Scores(); }
 
 		score[0].name = "Donny";
 		score[1].name = "Kelper";
@@ -115,22 +115,24 @@ public class Score : MonoBehaviour {
 						}
 				} else {}
 	}
-
+/*
 	public class Scores{
 		public void initialize(){
 			print("Score System initialized");
 		}
 	}
-
+*/
 
 	[System.Serializable]
-	public class Highscore{
-		//public string name { get; set; }
+	public class Scores{
+
 		public string name;
 		public int rounds;
 		public int kills;
 
-		//public Highscore(){}
+		public void initialize(){
+			print("Score System initialized");
+		}
 	}
 	
 }
