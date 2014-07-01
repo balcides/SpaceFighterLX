@@ -34,9 +34,9 @@ public class Score : MonoBehaviour {
 
 	public int numOfScoresToDisplay;
 
+	public bool displayScores;
+	
 	public Scores scores = new Scores();
-
-
 	public Scores[] score = new Scores[10];
 
 
@@ -93,7 +93,7 @@ public class Score : MonoBehaviour {
 
 	void OnGUI() {
 
-		if (game.isGameMenu == true) {
+		if (game.isGameMenu == true && displayScores) {
 						// TITLE GUI
 						GUI.Box (new Rect (center.location.offset.x + titleOffset.x, 
 		                 center.location.offset.y + titleOffset.y, 120, 30),
