@@ -81,7 +81,7 @@ public class Score : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-
+		print(PlayerPrefs.GetString("Player Name"));
 
 	}
 	
