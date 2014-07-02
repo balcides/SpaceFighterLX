@@ -60,6 +60,7 @@ public class menuButtons : MonoBehaviour {
 			
 			case "Button-mainmenu":
 				Debug.Log("cube MAINMENU working");
+				Application.LoadLevel("RunGame");
 			    cam.animation.Play("camPanMenuStartReturn");
 				break;
 			
