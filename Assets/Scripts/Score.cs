@@ -82,6 +82,11 @@ public class Score : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		print(PlayerPrefs.GetString("Player Name"));
+		print(" the value of key 'currentRounds' = " + PlayerPrefs.GetInt("highscoreCurrentRounds"));
+		print(" the value of key 'currentKills' = " + PlayerPrefs.GetInt("highscoreCurrentKills"));
+
+		//PlayerPrefs.SetInt("highscoreCurrentRounds", totalRoundsWon);
+		//PlayerPrefs.SetInt("highscoreCurrentKills", totalEnemyKills);
 
 	}
 	

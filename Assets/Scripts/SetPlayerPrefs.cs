@@ -11,6 +11,10 @@ using System.Collections;
 
 public class SetPlayerPrefs : MonoBehaviour {
 
+	public int totalRoundsWon;
+	public int totalEnemyKills;
+
+
 	public float buttonx;
 	public float buttony;
 	public float buttonWidth;
@@ -43,6 +47,8 @@ public class SetPlayerPrefs : MonoBehaviour {
 		if (GUI.Button(new Rect(buttonx + _GUIClasses.instance.location.offset.x, 
 		                        buttony + _GUIClasses.instance.location.offset.y, 
 		                        buttonWidth, buttonHeight), buttonLabel)){
-			Debug.Log("Clicked the button with text");}
+			PlayerPrefs.SetInt("highscoreCurrentRounds", totalRoundsWon);
+			PlayerPrefs.SetInt("highscoreCurrentKills", totalEnemyKills);
+		}
 	}
 }
