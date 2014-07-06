@@ -69,7 +69,7 @@ public class Score : MonoBehaviour {
 		score[8].name = "Hopper";
 		score[9].name = "Wilfredo";
 
-		score[0].rounds = 9;
+		score[0].rounds = 98;
 		score[1].rounds = 5;
 		score[2].rounds = 2;
 
@@ -82,16 +82,17 @@ public class Score : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		//print(PlayerPrefs.GetString("Player Name"));
-		print(" the value of key 'highscore0kills' = " + PlayerPrefs.GetInt("highscore0kills"));
-		print(" the value of key 'highscore8kills' = " + PlayerPrefs.GetInt("highscore8kills"));
+		//print(" the value of key 'highscore0kills' = " + PlayerPrefs.GetInt("highscore0kills"));
+		//print(" the value of key 'highscore8kills' = " + PlayerPrefs.GetInt("highscore8kills"));
+		addNewHighscore();
 
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		center.location.updateLocation();
-		syncPlayerPrefs();
-		Start();
+		//syncPlayerPrefs();
+		//Start();
 	}
 
 
@@ -118,6 +119,55 @@ public class Score : MonoBehaviour {
 			       			 score [i].kills.ToString (), roundsGUIStyle);
 						}
 				} else {}
+	}
+
+	//updates score info
+	void addNewHighscore(){
+
+		//check if the new score are above hold high scores
+		int currentRounds = PlayerPrefs.GetInt("highscore4rounds");
+		int currentKills = PlayerPrefs.GetInt("highscore4kills");
+		int newHighscorePos = 0;
+		int debugRounds = 0;
+		int debugKills = 0;
+
+		//if so, calc what the number of highhore would be
+		for (int i = 0; i < numOfScoresToDisplay; i++) {
+		
+			if(currentRounds > score[i].rounds){ 			
+				newHighscorePos = i;		// new score is higher
+				//debugRounds = score[i].rounds;
+				break;
+
+			}else if(currentRounds == score[i].rounds && currentKills > score[i].kills){
+				newHighscorePos = i;		// new score is higher
+				//debugKills = score[i].kills;
+				break;
+			}
+			else{}
+		}
+
+		for (int i = numOfScoresToDisplay - 1; i >= 0; i--) {
+
+			if(i > 0){
+			PlayerPrefs.SetString("highscore" + i + "name", score[i-1].name);
+			score[i].name = score[i-1].name;
+			PlayerPrefs.SetInt("highscore" + i + "rounds", score[i-1].rounds);
+			score[i].rounds = score[i-1].rounds;
+			PlayerPrefs.SetInt("highscore" + i + "kills", score[i-1].kills);
+			score[i].kills = score[i-1].kills;}
+		}
+
+		Debug.Log("newHighscorePos = " + newHighscorePos);
+
+		/*
+		Debug.Log("current rounds = " + currentRounds);
+		Debug.Log("score[i].rounds = " + debugRounds);
+		Debug.Log("current kills = " + currentKills);
+		Debug.Log("score[i].kills = " + debugKills);
+		*/
+
+		//then add to data and save
 	}
 
 	//syncs player data for the score using unity's player prefs class
@@ -158,14 +208,6 @@ public class Score : MonoBehaviour {
 			}
 		}
 	}
-
-/*
-	public class Scores{
-		public void initialize(){
-			print("Score System initialized");
-		}
-	}
-*/
 
 	[System.Serializable]
 	public class Scores{
