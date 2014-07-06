@@ -26,20 +26,22 @@ public class Score : MonoBehaviour {
 	public GUIStyle killsGUIStyle;
 	public GUIStyle roundsGUIStyle;
 
-	public float heightOffset = 50;
+	public float heightOffset;
 	public Vector2 titleOffset;
 	public Vector2 namesOffset;
 	public Vector2 roundsOffset;
 	public Vector2 killsOffset;
 
 	public int numOfScoresToDisplay;
+	public string newName;
 
 	public bool displayScores;
 	
 	public Scores scores = new Scores();
 	public Scores[] score = new Scores[10];
 
-
+	private int newHighscorePos;
+	
 	void Awake(){
 
 		center = GetComponent<_GUIClasses>();
@@ -52,9 +54,10 @@ public class Score : MonoBehaviour {
 		namesOffset = new Vector2(-232, -150);
 		roundsOffset = new Vector2(-52, -150);
 		killsOffset = new Vector2(90, -150);
+
 		numOfScoresToDisplay = 8;
-
-
+		newName = "- type you name here -";
+		newHighscorePos = 0;
 
 		for( int i = 0; i < 10; i++){ score[i] = new Scores(); }
 
@@ -94,28 +97,36 @@ public class Score : MonoBehaviour {
 
 
 	void OnGUI() {
-
 		if (game.isGameMenu == true && displayScores) {
-						// TITLE GUI
-						GUI.Box (new Rect (center.location.offset.x + titleOffset.x, 
-		                 center.location.offset.y + titleOffset.y, 120, 30),
-		        		"Name            Rounds         Kills", titleGUIStyle);
 
-						//SCORE - info gui text
-						for (int i = 0; i < numOfScoresToDisplay; i++) {
-								GUI.Box (new Rect (center.location.offset.x + namesOffset.x, 
-			                 center.location.offset.y + namesOffset.y + i * heightOffset, 120, 30),
-			        		 score [i].name, namesGUIStyle);
+			//Set Player name
+			GUI.SetNextControlName("nameTextField");
+			newName = GUI.TextField(new Rect(-10, -10, 1, 1), newName, 22);
+			GUI.FocusControl("nameTextField");
 
-								GUI.Box (new Rect (center.location.offset.x + roundsOffset.x, 
-			                 center.location.offset.y + roundsOffset.y + i * heightOffset, 120, 30),
-			       			 score [i].rounds.ToString (), killsGUIStyle);
+			PlayerPrefs.SetString("highscore" + newHighscorePos + "name", newName); //ask player for name
+			score[newHighscorePos].name = newName;
 
-								GUI.Box (new Rect (center.location.offset.x + killsOffset.x, 
-			                 center.location.offset.y + killsOffset.y + i * heightOffset, 120, 30),
-			       			 score [i].kills.ToString (), roundsGUIStyle);
+			// TITLE GUI
+			GUI.Box (new Rect (center.location.offset.x + titleOffset.x, 
+	         center.location.offset.y + titleOffset.y, 120, 30),
+			"Name            Rounds         Kills", titleGUIStyle);
+
+			//SCORE - info gui text
+			for (int i = 0; i < numOfScoresToDisplay; i++) {
+					GUI.Box (new Rect (center.location.offset.x + namesOffset.x, 
+	             center.location.offset.y + namesOffset.y + i * heightOffset, 120, 30),
+	    		 score [i].name, namesGUIStyle);
+
+					GUI.Box (new Rect (center.location.offset.x + roundsOffset.x, 
+	             center.location.offset.y + roundsOffset.y + i * heightOffset, 120, 30),
+	   			 score [i].rounds.ToString (), killsGUIStyle);
+
+					GUI.Box (new Rect (center.location.offset.x + killsOffset.x, 
+	             center.location.offset.y + killsOffset.y + i * heightOffset, 120, 30),
+	   			 score [i].kills.ToString (), roundsGUIStyle);
 						}
-				} else {}
+		} else {}
 	}
 
 	//updates score info
@@ -124,11 +135,9 @@ public class Score : MonoBehaviour {
 		//check if the new score are above hold high scores
 		int currentRounds = PlayerPrefs.GetInt("currentRounds");
 		int currentKills = PlayerPrefs.GetInt("currentKills");
-		int newHighscorePos = numOfScoresToDisplay;
 
 		//if so, calc what the number of highhore would be
 		for (int i = 0; i < numOfScoresToDisplay; i++) {
-			Debug.Log(i);
 			if(currentRounds > score[i].rounds){ 			
 				newHighscorePos = i;		// new score is higher
 				break;
@@ -137,7 +146,7 @@ public class Score : MonoBehaviour {
 				newHighscorePos = i;		// new score is higher
 				break;
 			}
-			else{Debug.Log("newHighscorePos = " + newHighscorePos);}
+			else{Debug.Log("score calc complete...newHighscorePos = " + newHighscorePos);}
 		}
 
 		if(newHighscorePos < numOfScoresToDisplay){
