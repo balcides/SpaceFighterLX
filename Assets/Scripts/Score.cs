@@ -82,11 +82,8 @@ public class Score : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		//print(PlayerPrefs.GetString("Player Name"));
-		print(" the value of key 'highscore4name' = " + PlayerPrefs.GetString("highscore4name"));
-		print(" the value of key 'highscore8name' = " + PlayerPrefs.GetString("highscore8name"));
-
-		//PlayerPrefs.SetInt("highscoreCurrentRounds", totalRoundsWon);
-		//PlayerPrefs.SetInt("highscoreCurrentKills", totalEnemyKills);
+		print(" the value of key 'highscore0kills' = " + PlayerPrefs.GetInt("highscore0kills"));
+		print(" the value of key 'highscore8kills' = " + PlayerPrefs.GetInt("highscore8kills"));
 
 	}
 	
@@ -130,15 +127,34 @@ public class Score : MonoBehaviour {
 
 		for (int i = 0; i <= numOfScoresToDisplay; i++) {
 
+			//Set and get score -------------- NAME -----------------------
 			if(PlayerPrefs.HasKey("highscore" + i + "name")){
-
 				//copy to local highscore prefs
 				score[i].name = PlayerPrefs.GetString("highscore" + i + "name");
 
 			}else{
 				//set player prefs to local data
 				PlayerPrefs.SetString("highscore" + i + "name", score[i].name);
+			}
 
+			//Set and get score ----------------- ROUNDS ----------------------
+			if(PlayerPrefs.HasKey("highscore" + i + "rounds")){
+				//copy to local highscore prefs
+				score[i].rounds = PlayerPrefs.GetInt("highscore" + i + "rounds");
+				
+			}else{
+				//set player prefs to local data
+				PlayerPrefs.SetInt("highscore" + i + "rounds", score[i].rounds);
+			}
+
+			//Set and get score -------------- KILLS -----------------------
+			if(PlayerPrefs.HasKey("highscore" + i + "kills")){
+				//copy to local highscore prefs
+				score[i].kills = PlayerPrefs.GetInt("highscore" + i + "kills");
+				
+			}else{
+				//set player prefs to local data
+				PlayerPrefs.SetInt("highscore" + i + "kills", score[i].kills);
 			}
 		}
 	}
