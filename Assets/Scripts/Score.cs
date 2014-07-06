@@ -114,26 +114,17 @@ public class Score : MonoBehaviour {
 
 			//SCORE - info gui text
 			for (int i = 0; i < numOfScoresToDisplay; i++) {
+					GUI.Box (new Rect (center.location.offset.x + namesOffset.x, 
+	             center.location.offset.y + namesOffset.y + i * heightOffset, 120, 30),
+	    		 score [i].name, namesGUIStyle);
 
-				if(i == 0){
-					GUI.color = new Color(1,1,0,1);
-				}else if( i == newHighscorePos){
-					GUI.color = Color.white;
-				}else{
-					GUI.color = new Color(1,0.5f,0,1);
-				}
+					GUI.Box (new Rect (center.location.offset.x + roundsOffset.x, 
+	             center.location.offset.y + roundsOffset.y + i * heightOffset, 120, 30),
+	   			 score [i].rounds.ToString (), killsGUIStyle);
 
-				GUI.Box (new Rect (center.location.offset.x + namesOffset.x, 
-            					   center.location.offset.y + namesOffset.y + i * heightOffset, 120, 30),
-    							   score [i].name, namesGUIStyle);
-
-				GUI.Box (new Rect (center.location.offset.x + roundsOffset.x, 
-						           center.location.offset.y + roundsOffset.y + i * heightOffset, 120, 30),
-						   		   score [i].rounds.ToString (), killsGUIStyle);
-
-				GUI.Box (new Rect (center.location.offset.x + killsOffset.x, 
-					               center.location.offset.y + killsOffset.y + i * heightOffset, 120, 30),
-					   			   score [i].kills.ToString (), roundsGUIStyle);
+					GUI.Box (new Rect (center.location.offset.x + killsOffset.x, 
+	             center.location.offset.y + killsOffset.y + i * heightOffset, 120, 30),
+	   			 score [i].kills.ToString (), roundsGUIStyle);
 						}
 		} else {}
 	}
