@@ -81,9 +81,9 @@ public class Score : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		print(PlayerPrefs.GetString("Player Name"));
-		print(" the value of key 'currentRounds' = " + PlayerPrefs.GetInt("highscoreCurrentRounds"));
-		print(" the value of key 'currentKills' = " + PlayerPrefs.GetInt("highscoreCurrentKills"));
+		//print(PlayerPrefs.GetString("Player Name"));
+		print(" the value of key 'highscore4name' = " + PlayerPrefs.GetString("highscore4name"));
+		print(" the value of key 'highscore8name' = " + PlayerPrefs.GetString("highscore8name"));
 
 		//PlayerPrefs.SetInt("highscoreCurrentRounds", totalRoundsWon);
 		//PlayerPrefs.SetInt("highscoreCurrentKills", totalEnemyKills);
@@ -93,6 +93,8 @@ public class Score : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		center.location.updateLocation();
+		syncPlayerPrefs();
+		Start();
 	}
 
 
@@ -120,6 +122,27 @@ public class Score : MonoBehaviour {
 						}
 				} else {}
 	}
+
+	//syncs player data for the score using unity's player prefs class
+	void syncPlayerPrefs(){
+
+
+
+		for (int i = 0; i <= numOfScoresToDisplay; i++) {
+
+			if(PlayerPrefs.HasKey("highscore" + i + "name")){
+
+				//copy to local highscore prefs
+				score[i].name = PlayerPrefs.GetString("highscore" + i + "name");
+
+			}else{
+				//set player prefs to local data
+				PlayerPrefs.SetString("highscore" + i + "name", score[i].name);
+
+			}
+		}
+	}
+
 /*
 	public class Scores{
 		public void initialize(){

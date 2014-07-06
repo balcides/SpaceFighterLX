@@ -47,8 +47,8 @@ public class SetPlayerPrefs : MonoBehaviour {
 		if (GUI.Button(new Rect(buttonx + _GUIClasses.instance.location.offset.x, 
 		                        buttony + _GUIClasses.instance.location.offset.y, 
 		                        buttonWidth, buttonHeight), buttonLabel)){
-			PlayerPrefs.SetInt("highscoreCurrentRounds", totalRoundsWon);
-			PlayerPrefs.SetInt("highscoreCurrentKills", totalEnemyKills);
+			PlayerPrefs.SetInt("highscore4Name", totalRoundsWon);
+			PlayerPrefs.SetInt("highscore8Name", totalEnemyKills);
 		}
 	}
 }
