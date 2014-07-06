@@ -41,6 +41,7 @@ public class Score : MonoBehaviour {
 	public Scores[] score = new Scores[10];
 
 	private int newHighscorePos;
+	private Color pulseColor;
 	
 	void Awake(){
 
@@ -93,6 +94,7 @@ public class Score : MonoBehaviour {
 	void Update () {
 
 		center.location.updateLocation();
+		pulseColor = Color.Lerp(Color.white, Color.black, Mathf.PingPong(Time.time * 1.2f,0.5f));
 	}
 
 
@@ -118,7 +120,7 @@ public class Score : MonoBehaviour {
 				if(i == 0){
 					GUI.color = new Color(1,1,0,1);
 				}else if( i == newHighscorePos){
-					GUI.color = Color.white;
+					GUI.color = pulseColor;
 				}else{
 					GUI.color = new Color(1,0.5f,0,1);
 				}
