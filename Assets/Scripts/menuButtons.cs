@@ -57,6 +57,11 @@ public class menuButtons : MonoBehaviour {
 			case "Button-veteran":
 				Debug.Log("cube VETERAN working");
 				break;
+
+			case "Button-dataDebug":
+				Debug.Log("cube VETERAN working");
+				Application.LoadLevel("Debug_DataPrefs");
+				break;
 			
 			case "Button-mainmenu":
 				Debug.Log("cube MAINMENU working");

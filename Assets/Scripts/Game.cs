@@ -32,6 +32,8 @@ public class Game : MonoBehaviour {
 	public TextMesh livesText;
 	public TextMesh scoreText;
 
+	public int gameID = 0;
+
 	//private livesText LivesText;
 
 	//requires components if the game is not a menu
@@ -75,7 +77,10 @@ public class Game : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+		if(PlayerPrefs.HasKey("currentGameID")){
+			gameID = PlayerPrefs.GetInt("currentGameID");
+			PlayerPrefs.SetInt("currentGameID", ++gameID);
+		}else{ PlayerPrefs.SetInt("currentGameID", 0); }
 	}
 	
 	// Update is called once per frame
