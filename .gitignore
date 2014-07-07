@@ -8,6 +8,7 @@ Library/
 Assets/Standard Assets (Mobile)/
 Assets/Standard Assets (Mobile)/Materials/grid.mat
 Assets/Standard Assets (Mobile).meta
+*.userprefs
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
 # ===================================== #
