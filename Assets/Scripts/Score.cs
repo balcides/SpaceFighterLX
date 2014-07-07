@@ -58,7 +58,7 @@ public class Score : MonoBehaviour {
 
 		numOfScoresToDisplay = 8;
 		newName = "- type you name here -";
-		newHighscorePos = 0;
+		newHighscorePos = numOfScoresToDisplay + 1;
 
 		for( int i = 0; i < 10; i++){ score[i] = new Scores(); }
 
@@ -86,6 +86,8 @@ public class Score : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
+		//overwritePlayerPrefs(); //Reset player prefs
+		syncPlayerPrefs();
 		addNewHighscore();
 
 	}
@@ -99,44 +101,47 @@ public class Score : MonoBehaviour {
 
 
 	void OnGUI() {
+
 		if (game.isGameMenu == true && displayScores) {
+			if(newHighscorePos < numOfScoresToDisplay){
 
-			//Set Player name
-			GUI.SetNextControlName("nameTextField");
-			newName = GUI.TextField(new Rect(-10, -10, 1, 1), newName, 22);
-			GUI.FocusControl("nameTextField");
+				// SET NEW PLAYER NAME WITH NEW SCORE POS
+				GUI.SetNextControlName("nameTextField");							
+				newName = GUI.TextField(new Rect(-10, -10, 1, 1), newName, 22);
+				GUI.FocusControl("nameTextField");
 
-			PlayerPrefs.SetString("highscore" + newHighscorePos + "name", newName); //ask player for name
-			score[newHighscorePos].name = newName;
+				PlayerPrefs.SetString("highscore" + newHighscorePos + "name", newName); //ask player for name
+				score[newHighscorePos].name = newName;
+			}else{}
 
-			// TITLE GUI
-			GUI.Box (new Rect (center.location.offset.x + titleOffset.x, 
-	         center.location.offset.y + titleOffset.y, 120, 30),
-			"Name            Rounds         Kills", titleGUIStyle);
+				// TITLE GUI
+				GUI.Box (new Rect (center.location.offset.x + titleOffset.x, 
+		         center.location.offset.y + titleOffset.y, 120, 30),
+				"Name            Rounds         Kills", titleGUIStyle);
 
-			//SCORE - info gui text
-			for (int i = 0; i < numOfScoresToDisplay; i++) {
+				//SCORE - info gui text
+				for (int i = 0; i < numOfScoresToDisplay; i++) {
 
-				if(i == 0){
-					GUI.color = new Color(1,1,0,1);
-				}else if( i == newHighscorePos){
-					GUI.color = pulseColor;
-				}else{
-					GUI.color = new Color(1,0.5f,0,1);
+					if(i == 0){
+						GUI.color = new Color(1,1,0,1);
+					}else if( i == newHighscorePos){
+						GUI.color = pulseColor;
+					}else{
+						GUI.color = new Color(1,0.5f,0,1);
+					}
+
+					GUI.Box (new Rect (center.location.offset.x + namesOffset.x, 
+	            					   center.location.offset.y + namesOffset.y + i * heightOffset, 120, 30),
+	    							   score [i].name, namesGUIStyle);
+
+					GUI.Box (new Rect (center.location.offset.x + roundsOffset.x, 
+							           center.location.offset.y + roundsOffset.y + i * heightOffset, 120, 30),
+							   		   score [i].rounds.ToString (), killsGUIStyle);
+
+					GUI.Box (new Rect (center.location.offset.x + killsOffset.x, 
+						               center.location.offset.y + killsOffset.y + i * heightOffset, 120, 30),
+						   			   score [i].kills.ToString (), roundsGUIStyle);
 				}
-
-				GUI.Box (new Rect (center.location.offset.x + namesOffset.x, 
-            					   center.location.offset.y + namesOffset.y + i * heightOffset, 120, 30),
-    							   score [i].name, namesGUIStyle);
-
-				GUI.Box (new Rect (center.location.offset.x + roundsOffset.x, 
-						           center.location.offset.y + roundsOffset.y + i * heightOffset, 120, 30),
-						   		   score [i].rounds.ToString (), killsGUIStyle);
-
-				GUI.Box (new Rect (center.location.offset.x + killsOffset.x, 
-					               center.location.offset.y + killsOffset.y + i * heightOffset, 120, 30),
-					   			   score [i].kills.ToString (), roundsGUIStyle);
-						}
 		} else {}
 	}
 
@@ -184,16 +189,10 @@ public class Score : MonoBehaviour {
 				}
 			}
 		}
-
-			
-
-			//then add to data and save
 	}
 
 	//syncs player data for the score using unity's player prefs class
 	void syncPlayerPrefs(){
-
-
 
 		for (int i = 0; i <= numOfScoresToDisplay; i++) {
 
@@ -226,6 +225,20 @@ public class Score : MonoBehaviour {
 				//set player prefs to local data
 				PlayerPrefs.SetInt("highscore" + i + "kills", score[i].kills);
 			}
+		}
+	}
+
+	//resets player prefs (USE WITH CAUTION)
+	void overwritePlayerPrefs(){
+		
+		for (int i = 0; i <= numOfScoresToDisplay; i++) {
+
+				PlayerPrefs.SetString("highscore" + i + "name", score[i].name);
+				PlayerPrefs.SetInt("highscore" + i + "rounds", score[i].rounds);
+				PlayerPrefs.SetInt("highscore" + i + "kills", score[i].kills);
+				PlayerPrefs.SetInt("currentRounds", 13);
+			    PlayerPrefs.SetInt("currentKills", 1287);
+			
 		}
 	}
 
