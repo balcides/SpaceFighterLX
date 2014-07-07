@@ -90,6 +90,8 @@ public class Score : MonoBehaviour {
 		syncPlayerPrefs();
 		addNewHighscore();
 
+		Debug.Log ("The latest GameID is : " + PlayerPrefs.GetInt("currentGameID"));
+
 	}
 	
 	// Update is called once per frame
@@ -151,6 +153,7 @@ public class Score : MonoBehaviour {
 		//check if the new score are above hold high scores
 		int currentRounds = PlayerPrefs.GetInt("currentRounds");
 		int currentKills = PlayerPrefs.GetInt("currentKills");
+		int currentGameId = PlayerPrefs.GetInt("currentGameID");
 
 		//if so, calc what the number of highhore would be
 		for (int i = 0; i < numOfScoresToDisplay; i++) {
@@ -165,7 +168,11 @@ public class Score : MonoBehaviour {
 			else{Debug.Log("score calc complete...newHighscorePos = " + newHighscorePos);}
 		}
 
+
+
 		if(newHighscorePos < numOfScoresToDisplay){
+
+			if(currentGameId == score[newHighscorePos].gameID){ return; }else{} //if gameID matches new score position, exit function using 'return'
 			for (int i = numOfScoresToDisplay - 1; i >= newHighscorePos; i--) {
 
 				if(i == newHighscorePos){
@@ -238,6 +245,7 @@ public class Score : MonoBehaviour {
 				PlayerPrefs.SetInt("highscore" + i + "kills", score[i].kills);
 				PlayerPrefs.SetInt("currentRounds", 13);
 			    PlayerPrefs.SetInt("currentKills", 1287);
+				PlayerPrefs.SetInt("currentGameID", 0);
 			
 		}
 	}
@@ -248,6 +256,7 @@ public class Score : MonoBehaviour {
 		public string name;
 		public int rounds;
 		public int kills;
+		public int gameID;
 
 		public void initialize(){
 			print("Score System initialized");
