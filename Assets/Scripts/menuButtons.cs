@@ -52,6 +52,7 @@ public class menuButtons : MonoBehaviour {
 			
 			case "Button-beginner":
 				Debug.Log("cube BEGINNER working");
+			    Application.LoadLevel("Debug_level_test");
 				break;
 			
 			case "Button-veteran":
@@ -68,9 +69,14 @@ public class menuButtons : MonoBehaviour {
 				Application.LoadLevel("RunGame");
 			    cam.animation.Play("camPanMenuStartReturn");
 				break;
+
+			case "Button-resetScore":
+				Debug.Log("reset score working");
+				Score.instance.overwritePlayerPrefs();
+				break;
 			
 			default:
-				Debug.Log("something button related is not working. Check StartClick.cs for details");
+				Debug.Log("Your button is not being called properly by name in script. Check menuButton.cs for details");
 				break;
 		}
         		//Application.LoadLevel("SomeLevel");

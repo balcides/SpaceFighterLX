@@ -28,11 +28,12 @@ public class Game : MonoBehaviour {
 	
 	public Transform spawnerGO;
 	public bool isGameMenu;
+	public bool enableTrackGameID;
 	
 	public TextMesh livesText;
 	public TextMesh scoreText;
 
-	public int gameID = 0;
+	public int gameID;
 
 	//private livesText LivesText;
 
@@ -77,10 +78,14 @@ public class Game : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		if(PlayerPrefs.HasKey("currentGameID")){
-			gameID = PlayerPrefs.GetInt("currentGameID");
-			PlayerPrefs.SetInt("currentGameID", ++gameID);
-		}else{ PlayerPrefs.SetInt("currentGameID", 0); }
+
+		if(enableTrackGameID){
+			if(PlayerPrefs.HasKey("currentGameID")){
+				gameID = PlayerPrefs.GetInt("currentGameID");
+				PlayerPrefs.SetInt("currentGameID", ++gameID);
+				Debug.Log("game ID tracking is working and = " + gameID);
+			}else{ PlayerPrefs.SetInt("currentGameID", 0); Debug.Log ("either currentGameID doesnt have key OR enabledTrackGameID is false"); }
+		}else{}
 	}
 	
 	// Update is called once per frame

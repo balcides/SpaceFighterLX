@@ -12,6 +12,8 @@ using System;
 
 public class Score : MonoBehaviour {
 
+	public static Score instance;	//calls itself to make it global
+
 	private Game game;
 
     public int topScore = 0;       //overall top score
@@ -36,15 +38,18 @@ public class Score : MonoBehaviour {
 	public string newName;
 
 	public bool displayScores;
+	public bool resetScore;
+
+	public int newHighscorePos;
 	
 	public Scores scores = new Scores();
 	public Scores[] score = new Scores[10];
 
-	private int newHighscorePos;
 	private Color pulseColor;
 	
 	void Awake(){
-
+		instance = this;	//makes this easy to call from anywhere
+	
 		center = GetComponent<_GUIClasses>();
 		game = GetComponent<Game>();
 
@@ -86,7 +91,7 @@ public class Score : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		//overwritePlayerPrefs(); //Reset player prefs
+		if(resetScore){ overwritePlayerPrefs(); }//Reset player prefs
 		syncPlayerPrefs();
 		addNewHighscore();
 
@@ -150,6 +155,8 @@ public class Score : MonoBehaviour {
 	//updates score info
 	void addNewHighscore(){
 
+		newHighscorePos = numOfScoresToDisplay + 1;
+
 		//check if the new score are above hold high scores
 		int currentRounds = PlayerPrefs.GetInt("currentRounds");
 		int currentKills = PlayerPrefs.GetInt("currentKills");
@@ -157,6 +164,9 @@ public class Score : MonoBehaviour {
 
 		//if so, calc what the number of highhore would be
 		for (int i = 0; i < numOfScoresToDisplay; i++) {
+
+			if(currentGameId == score[newHighscorePos].gameID){ return; } //if gameID matches new score position, exit function using 'return'
+
 			if(currentRounds > score[i].rounds){ 			
 				newHighscorePos = i;		// new score is higher
 				break;
@@ -168,11 +178,8 @@ public class Score : MonoBehaviour {
 			else{Debug.Log("score calc complete...newHighscorePos = " + newHighscorePos);}
 		}
 
-
-
 		if(newHighscorePos < numOfScoresToDisplay){
 
-			if(currentGameId == score[newHighscorePos].gameID){ return; }else{} //if gameID matches new score position, exit function using 'return'
 			for (int i = numOfScoresToDisplay - 1; i >= newHighscorePos; i--) {
 
 				if(i == newHighscorePos){
@@ -236,7 +243,7 @@ public class Score : MonoBehaviour {
 	}
 
 	//resets player prefs (USE WITH CAUTION)
-	void overwritePlayerPrefs(){
+	public void overwritePlayerPrefs(){
 		
 		for (int i = 0; i <= numOfScoresToDisplay; i++) {
 
