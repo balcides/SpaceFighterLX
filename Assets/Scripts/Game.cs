@@ -84,7 +84,7 @@ public class Game : MonoBehaviour {
 				gameID = PlayerPrefs.GetInt("currentGameID");
 				PlayerPrefs.SetInt("currentGameID", ++gameID);
 				Debug.Log("game ID tracking is working and = " + gameID);
-			}else{ PlayerPrefs.SetInt("currentGameID", 0); Debug.Log ("either currentGameID doesnt have key OR enabledTrackGameID is false"); }
+			}else{ PlayerPrefs.SetInt("currentGameID", 1); Debug.Log ("either currentGameID doesnt have key OR enabledTrackGameID is false"); }
 		}else{}
 	}
 	

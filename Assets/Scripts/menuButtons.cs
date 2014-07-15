@@ -72,7 +72,9 @@ public class menuButtons : MonoBehaviour {
 
 			case "Button-resetScore":
 				Debug.Log("reset score working");
-				Score.instance.overwritePlayerPrefs();
+				Score.use.overwritePlayerPrefs();
+				if(Score.use.resetScore){ Score.use.resetScore = false;}
+				else{ Score.use.resetScore = true;}
 				break;
 			
 			default:

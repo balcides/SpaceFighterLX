@@ -12,7 +12,7 @@ using System;
 
 public class Score : MonoBehaviour {
 
-	public static Score instance;	//calls itself to make it global
+	public static Score use;	//calls itself to make it global 'i.e. Score.use.topScore, Score.use.reserScore, etc. etc. '
 
 	private Game game;
 
@@ -48,7 +48,7 @@ public class Score : MonoBehaviour {
 	private Color pulseColor;
 	
 	void Awake(){
-		instance = this;	//makes this easy to call from anywhere
+		use = this;	//makes this easy to call from anywhere
 	
 		center = GetComponent<_GUIClasses>();
 		game = GetComponent<Game>();
@@ -104,6 +104,7 @@ public class Score : MonoBehaviour {
 
 		center.location.updateLocation();
 		pulseColor = Color.Lerp(Color.white, Color.black, Mathf.PingPong(Time.time * 1.2f,0.5f));
+		if(resetScore){ overwritePlayerPrefs(); }//Reset player prefs
 	}
 
 
@@ -156,6 +157,9 @@ public class Score : MonoBehaviour {
 	void addNewHighscore(){
 
 		newHighscorePos = numOfScoresToDisplay + 1;
+		if(resetScore){newHighscorePos = PlayerPrefs.GetInt("currentGameID");}
+		 
+		Debug.Log ("new highscore position = " + newHighscorePos);
 
 		//check if the new score are above hold high scores
 		int currentRounds = PlayerPrefs.GetInt("currentRounds");
@@ -165,20 +169,26 @@ public class Score : MonoBehaviour {
 		//if so, calc what the number of highhore would be
 		for (int i = 0; i < numOfScoresToDisplay; i++) {
 
-			if(currentGameId == score[newHighscorePos].gameID){ return; } //if gameID matches new score position, exit function using 'return'
+			if(currentGameId == score[newHighscorePos].gameID){ return; 
+				Debug.Log ("current Game ID = new high score position");} //if gameID matches new score position, exit function using 'return'
 
 			if(currentRounds > score[i].rounds){ 			
 				newHighscorePos = i;		// new score is higher
+				Debug.Log("new highscore position = " + newHighscorePos);
 				break;
 
 			}else if(currentRounds == score[i].rounds && currentKills > score[i].kills){
 				newHighscorePos = i;		// new score is higher
+				Debug.Log("new highscore position = " + newHighscorePos);
 				break;
 			}
 			else{Debug.Log("score calc complete...newHighscorePos = " + newHighscorePos);}
 		}
 
+	
+
 		if(newHighscorePos < numOfScoresToDisplay){
+
 
 			for (int i = numOfScoresToDisplay - 1; i >= newHighscorePos; i--) {
 
@@ -190,6 +200,8 @@ public class Score : MonoBehaviour {
 					score[i].rounds = currentRounds;
 					PlayerPrefs.SetInt("highscore" + i + "kills", currentKills);
 					score[i].kills = currentKills;
+					PlayerPrefs.SetInt("highscore" + i + "GameID", currentGameId);
+					score[i].gameID = currentGameId;
 
 				}else{
 
@@ -199,7 +211,8 @@ public class Score : MonoBehaviour {
 					score[i].rounds = score[i-1].rounds;
 					PlayerPrefs.SetInt("highscore" + i + "kills", score[i-1].kills);
 					score[i].kills = score[i-1].kills;
-
+					PlayerPrefs.SetInt("highscore" + i + "GameID", score[i-1].gameID);
+					score[i].gameID = score[i-1].gameID;
 				}
 			}
 		}
@@ -239,6 +252,16 @@ public class Score : MonoBehaviour {
 				//set player prefs to local data
 				PlayerPrefs.SetInt("highscore" + i + "kills", score[i].kills);
 			}
+
+			//Set and get score -------------- GAME ID -----------------------
+			if(PlayerPrefs.HasKey("highscore" + i + "GameID")){
+				//copy to local highscore prefs
+				score[i].gameID = PlayerPrefs.GetInt("highscore" + i + "GameID");
+				
+			}else{
+				//set player prefs to local data
+				PlayerPrefs.SetInt("highscore" + i + "GameID", score[i].gameID);
+			}
 		}
 	}
 
@@ -247,12 +270,31 @@ public class Score : MonoBehaviour {
 		
 		for (int i = 0; i <= numOfScoresToDisplay; i++) {
 
-				PlayerPrefs.SetString("highscore" + i + "name", score[i].name);
-				PlayerPrefs.SetInt("highscore" + i + "rounds", score[i].rounds);
-				PlayerPrefs.SetInt("highscore" + i + "kills", score[i].kills);
-				PlayerPrefs.SetInt("currentRounds", 13);
-			    PlayerPrefs.SetInt("currentKills", 1287);
-				PlayerPrefs.SetInt("currentGameID", 0);
+			PlayerPrefs.SetString("highscore" + i + "name", score[i].name);
+			PlayerPrefs.SetInt("highscore" + i + "rounds", score[i].rounds);
+			PlayerPrefs.SetInt("highscore" + i + "kills", score[i].kills);
+			PlayerPrefs.SetInt("currentRounds", 13);
+		    PlayerPrefs.SetInt("currentKills", 1287);
+			PlayerPrefs.SetInt("currentGameID", 0);
+			
+			score[0].name = "Donny";
+			score[1].name = "Kelper";
+			score[2].name = "Harper";
+			score[3].name = "Don";
+			score[4].name = "Cisco Kid";
+			score[5].name = "Unitee";
+			score[6].name = "Gebee";
+			score[7].name = "Gilbert";
+			score[8].name = "Hopper";
+			score[9].name = "Wilfredo";
+			
+			score[0].rounds = 98;
+			score[1].rounds = 5;
+			score[2].rounds = 2;
+			
+			score[0].kills = 99999;
+			score[1].kills = 999;
+			score[2].kills = 10;
 			
 		}
 	}
