@@ -11,9 +11,9 @@ using System.Collections.Generic;
 
 [System.Serializable]
 public class _GUIClasses : MonoBehaviour {
-
-	public static  _GUIClasses instance;	//calls itself to make it global
-	void Awake(){ instance = this;}		//makes this easy to call from anywhere
+	
+	public static  _GUIClasses use;	//calls itself to make it global
+	void Awake(){ use = this;}		//makes this easy to call from anywhere
 
 	[SerializeField]
 	public Location location = new Location();

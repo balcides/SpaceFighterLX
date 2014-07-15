@@ -46,6 +46,8 @@ public class Score : MonoBehaviour {
 	public Scores[] score = new Scores[10];
 
 	private Color pulseColor;
+
+	private TouchScreenKeyboard keyboard;
 	
 	void Awake(){
 		use = this;	//makes this easy to call from anywhere
@@ -113,10 +115,16 @@ public class Score : MonoBehaviour {
 		if (game.isGameMenu == true && displayScores) {
 			if(newHighscorePos < numOfScoresToDisplay){
 
-				// SET NEW PLAYER NAME WITH NEW SCORE POS
-				GUI.SetNextControlName("nameTextField");							
-				newName = GUI.TextField(new Rect(-10, -10, 1, 1), newName, 22);
-				GUI.FocusControl("nameTextField");
+				if(Inputs.use.controls == Inputs.inputType.ios || Inputs.use.controls == Inputs.inputType.android){
+					keyboard = TouchScreenKeyboard.Open(newName);
+					if (keyboard != null){ newName = keyboard.text;}
+				}
+				else{
+					// SET NEW PLAYER NAME WITH NEW SCORE POS (PC controls are default)
+					GUI.SetNextControlName("nameTextField");							
+					newName = GUI.TextField(new Rect(-10, -10, 1, 1), newName, 22);
+					GUI.FocusControl("nameTextField");
+				}
 
 				PlayerPrefs.SetString("highscore" + newHighscorePos + "name", newName); //ask player for name
 				score[newHighscorePos].name = newName;

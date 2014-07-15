@@ -44,8 +44,8 @@ public class SetPlayerPrefs : MonoBehaviour {
 	}
 
 	void OnGUI() {
-		if (GUI.Button(new Rect(buttonx + _GUIClasses.instance.location.offset.x, 
-		                        buttony + _GUIClasses.instance.location.offset.y, 
+		if (GUI.Button(new Rect(buttonx + _GUIClasses.use.location.offset.x, 
+		                        buttony + _GUIClasses.use.location.offset.y, 
 		                        buttonWidth, buttonHeight), buttonLabel)){
 			PlayerPrefs.SetInt("currentRounds", totalRoundsWon);
 			PlayerPrefs.SetInt("currentKills", totalEnemyKills);

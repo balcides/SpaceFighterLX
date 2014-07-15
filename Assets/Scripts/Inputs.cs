@@ -14,7 +14,9 @@ using System.Collections;
 [RequireComponent (typeof (Assets))]				//require Assets
 
 public class Inputs : MonoBehaviour {
-	
+
+	public static Inputs use;	//calls itself to make it global 'i.e. Input.use.topScore, Input.use.resetScore, etc. etc. '
+
 	public enum inputType {ios, iCade, osx, pc, android, oculous};
 	public enum CtrlModes {mode1Starfox, mode2POV, mode3SideScroller, mode4Isometric};
 	
@@ -47,7 +49,8 @@ public class Inputs : MonoBehaviour {
     }
 	
 	void Awake(){
-		
+
+		use = this;
 		cam = GameObject.FindWithTag("MainCamera");
 		assets = GetComponent<Assets>();
 		playerShip = assets.playerShipGO.transform;										//grabs the player ship model from the assets
