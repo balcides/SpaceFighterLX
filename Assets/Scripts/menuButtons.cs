@@ -67,12 +67,16 @@ public class menuButtons : MonoBehaviour {
 				break;
 			
 			case "Button-mainmenu":
-				Debug.Log("cube MAINMENU working");
-				PlayerPrefs.Save();
-				Debug.Log ("Saving player prefs....");
-				Application.LoadLevel("RunGame");
-			    cam.animation.Play("camPanMenuStartReturn");
-				break;
+
+				if(!Game.use.isGameMenu || Score.use.displayScores){
+					Debug.Log ("Saving player prefs....");
+					PlayerPrefs.Save();
+					Application.LoadLevel("RunGame"); 	
+				}else{
+					Debug.Log("cube MAINMENU working");
+					if(cam.animation == null){} else{	cam.animation.Play("camPanMenuStartReturn");	}
+				}
+			break;
 
 			case "Button-resetScore":
 				Debug.Log("reset score working");

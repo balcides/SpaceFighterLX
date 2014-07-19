@@ -17,7 +17,8 @@ using System.Collections;
 [RequireComponent (typeof (Menu))]	
 
 public class Game : MonoBehaviour {
-	
+
+	public static Game use;
 	private Spawner spawner;
 	private WeaponSystem weaponSystem;
 	private Menu menu;
@@ -57,9 +58,7 @@ public class Game : MonoBehaviour {
 			weaponSystem = GetComponent<WeaponSystem>();
 			assets = GetComponent<Assets>();
 			score = GetComponent<Score>();
-			
 
-			
 			//require a gameobject called "spawner"
 			GameObject findSpawnerGO = GameObject.Find("SpawnerGO");
 			
@@ -73,7 +72,8 @@ public class Game : MonoBehaviour {
 	
 	void Awake(){
 			
-			initilizeGame(); 
+		initilizeGame(); 
+		use = this;
 	}
 
 	// Use this for initialization
