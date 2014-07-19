@@ -232,6 +232,7 @@ public class Score : MonoBehaviour {
 				}
 			}
 		}
+		PlayerPrefs.Save(); //saves local data to harrddisk
 	}
 
 	//syncs player data for the score using unity's player prefs class
@@ -279,6 +280,7 @@ public class Score : MonoBehaviour {
 				PlayerPrefs.SetInt("highscore" + i + "GameID", score[i].gameID);
 			}
 		}
+		PlayerPrefs.Save();
 	}
 
 	//resets player prefs (USE WITH CAUTION)

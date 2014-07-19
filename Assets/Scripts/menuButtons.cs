@@ -52,7 +52,9 @@ public class menuButtons : MonoBehaviour {
 			
 			case "Button-beginner":
 				Debug.Log("cube BEGINNER working");
-			    Application.LoadLevel("Debug_level_test");
+				PlayerPrefs.Save();
+				Debug.Log ("Saving player prefs....");
+				Application.LoadLevel("Debug_level_test");
 				break;
 			
 			case "Button-veteran":
@@ -66,6 +68,8 @@ public class menuButtons : MonoBehaviour {
 			
 			case "Button-mainmenu":
 				Debug.Log("cube MAINMENU working");
+				PlayerPrefs.Save();
+				Debug.Log ("Saving player prefs....");
 				Application.LoadLevel("RunGame");
 			    cam.animation.Play("camPanMenuStartReturn");
 				break;
@@ -73,6 +77,8 @@ public class menuButtons : MonoBehaviour {
 			case "Button-resetScore":
 				Debug.Log("reset score working");
 				Score.use.overwritePlayerPrefs();
+				PlayerPrefs.Save();
+				Debug.Log ("Saving player prefs....");
 				if(Score.use.resetScore){ Score.use.resetScore = false;}
 				else{ Score.use.resetScore = true;}
 				break;
