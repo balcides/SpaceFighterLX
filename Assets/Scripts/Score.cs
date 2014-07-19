@@ -48,6 +48,7 @@ public class Score : MonoBehaviour {
 	private Color pulseColor;
 
 	private TouchScreenKeyboard keyboard;
+	private bool enterName = false; 
 	
 	void Awake(){
 		use = this;	//makes this easy to call from anywhere
@@ -99,6 +100,8 @@ public class Score : MonoBehaviour {
 
 		Debug.Log ("The latest GameID is : " + PlayerPrefs.GetInt("currentGameID"));
 
+		enterName = false;
+
 	}
 	
 	// Update is called once per frame
@@ -115,9 +118,14 @@ public class Score : MonoBehaviour {
 		if (game.isGameMenu == true && displayScores) {
 			if(newHighscorePos < numOfScoresToDisplay){
 
+				// If input is set to IOS
 				if(Inputs.use.controls == Inputs.inputType.ios || Inputs.use.controls == Inputs.inputType.android){
-					keyboard = TouchScreenKeyboard.Open(newName);
-					if (keyboard != null){ newName = keyboard.text;}
+					if(!enterName){
+						keyboard = TouchScreenKeyboard.Open(newName);
+						if (keyboard != null){ newName = keyboard.text;}
+						enterName = true;
+					}
+
 				}
 				else{
 					// SET NEW PLAYER NAME WITH NEW SCORE POS (PC controls are default)
