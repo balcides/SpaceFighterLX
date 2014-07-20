@@ -26,7 +26,7 @@ public class _GUIClasses : MonoBehaviour {
 		[SerializeField]
 		public Point pointLocation = Point.TopLeft;
 		[SerializeField]
-		public Vector2 offset;
+		public Vector2 offset {get; set;}
 		
 		public void updateLocation(){
 			switch(pointLocation){

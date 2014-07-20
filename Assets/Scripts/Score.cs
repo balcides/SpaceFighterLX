@@ -320,10 +320,10 @@ public class Score : MonoBehaviour {
 	[System.Serializable]
 	public class Scores{
 
-		public string name;
-		public int rounds;
-		public int kills;
-		public int gameID;
+		public string name {get; set;}
+		public int rounds {get; set;}
+		public int kills {get; set;}
+		public int gameID {get; set;}
 
 		public void initialize(){
 			print("Score System initialized");
